@@ -5,59 +5,59 @@ export default function StatusBadge({ status, size = 'md' }) {
 
   const configs = {
     active: {
-      bg: 'bg-emerald-500/10 text-emerald-800 dark:text-emerald-300 border-emerald-500/25 dark:border-emerald-500/30',
+      bg: 'badge-success',
       label: 'Active',
-      dot: 'bg-emerald-500 shadow-[0_0_6px_rgba(16,185,129,0.7)]',
+      dot: 'bg-success',
     },
     approved: {
-      bg: 'bg-emerald-500/10 text-emerald-800 dark:text-emerald-300 border-emerald-500/25 dark:border-emerald-500/30',
+      bg: 'badge-success',
       label: 'Approved',
-      dot: 'bg-emerald-500 shadow-[0_0_6px_rgba(16,185,129,0.7)]',
+      dot: 'bg-success',
     },
     verified: {
-      bg: 'bg-emerald-500/10 text-emerald-800 dark:text-emerald-300 border-emerald-500/25 dark:border-emerald-500/30',
+      bg: 'badge-success',
       label: 'Verified',
-      dot: 'bg-emerald-500 shadow-[0_0_6px_rgba(16,185,129,0.7)]',
+      dot: 'bg-success',
     },
     pending: {
-      bg: 'bg-amber-500/10 text-amber-800 dark:text-amber-300 border-amber-500/25 dark:border-amber-500/30',
+      bg: 'badge-warning',
       label: 'Pending',
-      dot: 'bg-amber-500 shadow-[0_0_6px_rgba(245,158,11,0.6)]',
+      dot: 'bg-warning',
     },
     submitted: {
-      bg: 'bg-amber-500/10 text-amber-800 dark:text-amber-300 border-amber-500/25 dark:border-amber-500/30',
+      bg: 'badge-warning',
       label: 'Submitted',
-      dot: 'bg-amber-500 shadow-[0_0_6px_rgba(245,158,11,0.6)]',
+      dot: 'bg-warning',
     },
     interviewing: {
-      bg: 'bg-blue-500/10 text-blue-800 dark:text-blue-300 border-blue-500/25 dark:border-blue-500/30',
+      bg: 'badge-info',
       label: 'Interviewing',
-      dot: 'bg-blue-500 shadow-[0_0_6px_rgba(59,130,246,0.6)]',
+      dot: 'bg-info',
     },
     shortlisted: {
-      bg: 'bg-indigo-500/10 text-indigo-800 dark:text-indigo-300 border-indigo-500/25 dark:border-indigo-500/30',
+      bg: 'badge-primary',
       label: 'Shortlisted',
-      dot: 'bg-indigo-500 shadow-[0_0_6px_rgba(99,102,241,0.6)]',
+      dot: 'bg-primary',
     },
     offered: {
-      bg: 'bg-teal-500/10 text-teal-800 dark:text-teal-300 border-teal-500/25 dark:border-teal-500/30',
+      bg: 'badge-success',
       label: 'Offered',
-      dot: 'bg-teal-500 shadow-[0_0_6px_rgba(20,184,166,0.6)]',
+      dot: 'bg-success',
     },
     rejected: {
-      bg: 'bg-rose-500/10 text-rose-800 dark:text-rose-300 border-rose-500/25 dark:border-rose-500/30',
+      bg: 'badge-error',
       label: 'Rejected',
-      dot: 'bg-rose-500 shadow-[0_0_6px_rgba(244,63,94,0.6)]',
+      dot: 'bg-error',
     },
     open: {
-      bg: 'bg-sky-500/10 text-sky-800 dark:text-sky-300 border-sky-500/25 dark:border-sky-500/30',
+      bg: 'badge-info',
       label: 'Open',
-      dot: 'bg-sky-500 shadow-[0_0_6px_rgba(14,165,233,0.6)]',
+      dot: 'bg-info',
     },
     closed: {
-      bg: 'bg-slate-500/10 text-slate-700 dark:text-neutral-300 border-slate-500/20 dark:border-white/10',
+      bg: 'bg-secondary text-text-secondary border-border-subtle',
       label: 'Closed',
-      dot: 'bg-slate-400 dark:bg-neutral-500',
+      dot: 'bg-text-muted',
     },
   };
 

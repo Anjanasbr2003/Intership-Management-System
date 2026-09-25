@@ -184,9 +184,25 @@ const addDailyProgressLog = async (req, res) => {
       return res.status(400).json({ message: 'Date and completed task description are required' });
     }
 
+    let universityId = req.user.universityId;
+    if (!universityId) {
+      const profile = await StudentProfile.findOne({ where: { userId: req.user.id } });
+      if (profile && profile.universityId) {
+        universityId = profile.universityId;
+        req.user.universityId = universityId;
+        await req.user.save();
+      }
+    }
+
+    if (!universityId) {
+      return res.status(400).json({
+        message: 'Please associate your student account with an approved university before submitting progress logs.',
+      });
+    }
+
     const log = await DailyProgressLog.create({
       studentId: req.user.id,
-      universityId: req.user.universityId,
+      universityId,
       date: new Date(date),
       hoursWorked: hoursWorked ? Number(hoursWorked) : 8,
       tasksCompleted,

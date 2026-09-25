@@ -10,7 +10,7 @@ const {
   getStudentProgressLogs,
 } = require('../controllers/studentController');
 const { protect } = require('../middleware/auth');
-const { requireRole } = require('../middleware/rbac');
+const { requireRole, requireApproved } = require('../middleware/rbac');
 const { uploadCV: cvUploader, uploadImage } = require('../middleware/upload');
 
 // Student self routes
@@ -21,7 +21,7 @@ router.post('/cv', protect, requireRole('student'), cvUploader.single('cv'), upl
 router.post('/logs', protect, requireRole('student'), addDailyProgressLog);
 router.get('/logs', protect, requireRole('student'), getMyProgressLogs);
 
-// Progress log inspection by Head, Supervisor, Employer, Admin
-router.get('/:id/logs', protect, requireRole('head', 'supervisor', 'employer', 'admin'), getStudentProgressLogs);
+// Progress log inspection by Head, Supervisor, Employer, Admin (requires approved status)
+router.get('/:id/logs', protect, requireRole('head', 'supervisor', 'employer', 'admin'), requireApproved, getStudentProgressLogs);
 
 module.exports = router;

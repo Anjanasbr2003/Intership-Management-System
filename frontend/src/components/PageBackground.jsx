@@ -48,13 +48,13 @@ export default function PageBackground({
             playsInline
             preload="auto"
             poster={videoPoster || undefined}
-            className="w-full h-full object-cover scale-105 filter brightness-[0.96] dark:brightness-[0.85] contrast-[1.05]"
+            className="w-full h-full object-cover scale-105 filter opacity-25 dark:opacity-100 brightness-[1.1] dark:brightness-[0.85] contrast-[1.05] grayscale dark:grayscale-0 transition-all duration-700"
           >
             <source src={videoSrc || '/backgrounds/853946-hd_1280_720_50fps.mp4'} type="video/mp4" />
           </video>
           {/* Calibrated glass backdrop scrim: rich and non-whitish in day mode, deep obsidian in night mode */}
-          <div className="absolute inset-0 bg-slate-200/35 dark:bg-black/75 backdrop-blur-[2px]" />
-          <div className="absolute inset-0 bg-gradient-to-t from-[#eef2f7]/80 via-transparent to-[#eef2f7]/45 dark:from-black/90 dark:via-transparent dark:to-black/60" />
+          <div className="absolute inset-0 bg-background/85 dark:bg-black/75 backdrop-blur-[6px] dark:backdrop-blur-[2px]" />
+          <div className="absolute inset-0 bg-gradient-to-t from-background/90 via-background/40 to-background/90 dark:from-black/90 dark:via-transparent dark:to-black/60" />
         </div>
       )}
 
@@ -64,12 +64,12 @@ export default function PageBackground({
           <img
             src={resolvedImage}
             alt=""
-            className="w-full h-full object-cover scale-105 filter brightness-[0.98] dark:brightness-[0.65] contrast-[1.05] transition-all duration-700"
+            className="w-full h-full object-cover scale-105 filter opacity-25 dark:opacity-100 brightness-[1.1] dark:brightness-[0.65] contrast-[1.05] grayscale dark:grayscale-0 transition-all duration-700"
           />
           {/* Translucent theme scrim & backdrop frosting to blend seamlessly with scrolling UI */}
-          <div className="absolute inset-0 bg-slate-200/30 dark:bg-slate-950/80 backdrop-blur-[2px]" />
+          <div className="absolute inset-0 bg-background/85 dark:bg-slate-950/80 backdrop-blur-[4px] dark:backdrop-blur-[2px]" />
           {/* Subtle directional vignette for soft edges, depth, and contrast without blinding white */}
-          <div className="absolute inset-0 bg-gradient-to-b from-[#eef2f7]/40 via-transparent to-[#e2e8f0]/70 dark:from-black/60 dark:via-transparent dark:to-black/90" />
+          <div className="absolute inset-0 bg-gradient-to-b from-background/90 via-background/40 to-background/90 dark:from-black/60 dark:via-transparent dark:to-black/90" />
         </div>
       )}
 

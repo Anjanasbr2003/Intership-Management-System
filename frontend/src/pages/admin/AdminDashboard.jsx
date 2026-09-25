@@ -94,12 +94,12 @@ export default function AdminDashboard() {
       <PageBackground variant="admin" />
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-7 animate-applePageEnter">
         {/* Page Header */}
-        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-black/5 dark:border-white/10 pb-5">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-border-subtle pb-5">
           <div>
-            <h1 className="text-2xl sm:text-3xl font-bold text-neutral-900 dark:text-neutral-50 tracking-tight">
+            <h1 className="text-2xl sm:text-3xl font-bold text-text-primary tracking-tight">
               System Administration
             </h1>
-            <p className="text-neutral-500 dark:text-neutral-400 text-xs sm:text-sm mt-1">
+            <p className="text-text-muted text-xs sm:text-sm mt-1">
               Institutional oversight, university and corporate authorizations, and platform user registry.
             </p>
           </div>
@@ -107,101 +107,112 @@ export default function AdminDashboard() {
 
         {/* Structured Metric Summary Strip */}
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
-          <div className="glass-secondary glass-hover p-5 rounded-2xl">
-            <span className="text-xs font-medium text-neutral-500 dark:text-neutral-400 block">Pending Universities</span>
-            <div className="text-3xl font-bold text-neutral-900 dark:text-neutral-50 mt-1.5 tabular-nums">{stats?.pendingUniversities ?? 0}</div>
+          <div className="card hover-card-effect p-5 rounded-2xl">
+            <span className="text-xs font-medium text-text-muted block">Pending Universities</span>
+            <div className="text-3xl font-bold text-text-primary mt-1.5 tabular-nums">{stats?.pendingUniversities ?? 0}</div>
             <span className="inline-flex items-center gap-1 text-[11px] text-amber-600 dark:text-amber-400 font-semibold mt-1">
-              <span className="w-1.5 h-1.5 rounded-full bg-amber-500 animate-pulse"></span>
+              <span className="w-1.5 h-1.5 rounded-full bg-warning animate-pulse"></span>
               Awaiting authorization
             </span>
           </div>
 
-          <div className="glass-secondary glass-hover p-5 rounded-2xl">
-            <span className="text-xs font-medium text-neutral-500 dark:text-neutral-400 block">Pending Employers</span>
-            <div className="text-3xl font-bold text-neutral-900 dark:text-neutral-50 mt-1.5 tabular-nums">{stats?.pendingEmployers ?? 0}</div>
+          <div className="card hover-card-effect p-5 rounded-2xl">
+            <span className="text-xs font-medium text-text-muted block">Pending Employers</span>
+            <div className="text-3xl font-bold text-text-primary mt-1.5 tabular-nums">{stats?.pendingEmployers ?? 0}</div>
             <span className="inline-flex items-center gap-1 text-[11px] text-amber-600 dark:text-amber-400 font-semibold mt-1">
-              <span className="w-1.5 h-1.5 rounded-full bg-amber-500 animate-pulse"></span>
+              <span className="w-1.5 h-1.5 rounded-full bg-warning animate-pulse"></span>
               Awaiting verification
             </span>
           </div>
 
-          <div className="glass-secondary glass-hover p-5 rounded-2xl">
-            <span className="text-xs font-medium text-neutral-500 dark:text-neutral-400 block">Active Undergraduates</span>
-            <div className="text-3xl font-bold text-neutral-900 dark:text-neutral-50 mt-1.5 tabular-nums">{stats?.totalStudents ?? 0}</div>
-            <span className="text-[11px] text-neutral-500 dark:text-neutral-400 font-medium mt-1 inline-block">Enrolled candidates</span>
+          <div className="card hover-card-effect p-5 rounded-2xl">
+            <span className="text-xs font-medium text-text-muted block">Active Undergraduates</span>
+            <div className="text-3xl font-bold text-text-primary mt-1.5 tabular-nums">{stats?.totalStudents ?? 0}</div>
+            <span className="text-[11px] text-text-muted font-medium mt-1 inline-block">Enrolled candidates</span>
           </div>
 
-          <div className="glass-secondary glass-hover p-5 rounded-2xl">
-            <span className="text-xs font-medium text-neutral-500 dark:text-neutral-400 block">Published Internships</span>
-            <div className="text-3xl font-bold text-neutral-900 dark:text-neutral-50 mt-1.5 tabular-nums">{stats?.totalJobs ?? 0}</div>
-            <span className="text-[11px] text-neutral-500 dark:text-neutral-400 font-medium mt-1 inline-block">Active industry vacancies</span>
+          <div className="card hover-card-effect p-5 rounded-2xl">
+            <span className="text-xs font-medium text-text-muted block">Published Internships</span>
+            <div className="text-3xl font-bold text-text-primary mt-1.5 tabular-nums">{stats?.totalJobs ?? 0}</div>
+            <span className="text-[11px] text-text-muted font-medium mt-1 inline-block">Active industry vacancies</span>
           </div>
         </div>
 
         {/* Main Tabs & Table Surface with Reference Glassmorphism */}
-        <div className="glass-form rounded-2xl shadow-glass-floating overflow-hidden">
-          <div className="border-b border-black/5 dark:border-white/10 px-6 py-3.5 flex gap-2 overflow-x-auto bg-black/[0.02] dark:bg-white/[0.02]">
-            <button
-              onClick={() => setActiveTab('universities')}
-              className={`btn-press px-4 py-2 rounded-full text-xs font-medium flex items-center gap-2 whitespace-nowrap transition-all duration-200 ${
-                activeTab === 'universities'
-                  ? 'glass-pill bg-white dark:bg-white/20 text-neutral-950 dark:text-white shadow-glass-sm font-semibold border-white/70 dark:border-white/20'
-                  : 'text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-white hover:bg-white/30 dark:hover:bg-white/5'
-              }`}
-            >
-              <Building2 className="w-4 h-4" />
-              <span>University Approvals</span>
-              <span className="px-2 py-0.5 rounded-full text-[10px] bg-black/5 dark:bg-white/10 text-neutral-700 dark:text-neutral-300 tabular-nums font-semibold">
-                {pendingUnis.length}
-              </span>
-            </button>
+        <div className="flex flex-col lg:flex-row gap-6">
+          {/* Navigation Sidebar */}
+          <div className="lg:w-64 shrink-0 flex flex-col gap-4">
+            <div className="flex flex-row lg:flex-col gap-1 overflow-x-auto card-elevated p-3 rounded-2xl shadow-card-elevated shadow-lg h-fit">
+              <button
+                onClick={() => setActiveTab('universities')}
+                className={`transition-transform active:scale-95 px-4 py-3 rounded-xl text-sm font-medium flex items-center justify-between gap-3 whitespace-nowrap lg:w-full transition-all duration-200 ${
+                  activeTab === 'universities'
+                    ? 'sidebar-nav-item active'
+                    : 'sidebar-nav-item'
+                }`}
+              >
+                <div className="flex items-center gap-3 min-w-0">
+                  <Building2 className="w-4 h-4 shrink-0" />
+                  <span className="truncate">University Approvals</span>
+                </div>
+                <span className="px-2 py-0.5 rounded-full text-[10px] bg-surface-hover text-text-secondary tabular-nums font-semibold shrink-0">
+                  {pendingUnis.length}
+                </span>
+              </button>
 
-            <button
-              onClick={() => setActiveTab('employers')}
-              className={`btn-press px-4 py-2 rounded-full text-xs font-medium flex items-center gap-2 whitespace-nowrap transition-all duration-200 ${
-                activeTab === 'employers'
-                  ? 'glass-pill bg-white dark:bg-white/20 text-neutral-950 dark:text-white shadow-glass-sm font-semibold border-white/70 dark:border-white/20'
-                  : 'text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-white hover:bg-white/30 dark:hover:bg-white/5'
-              }`}
-            >
-              <Briefcase className="w-4 h-4" />
-              <span>Employer Approvals</span>
-              <span className="px-2 py-0.5 rounded-full text-[10px] bg-black/5 dark:bg-white/10 text-neutral-700 dark:text-neutral-300 tabular-nums font-semibold">
-                {pendingEmployers.length}
-              </span>
-            </button>
+              <button
+                onClick={() => setActiveTab('employers')}
+                className={`transition-transform active:scale-95 px-4 py-3 rounded-xl text-sm font-medium flex items-center justify-between gap-3 whitespace-nowrap lg:w-full transition-all duration-200 ${
+                  activeTab === 'employers'
+                    ? 'sidebar-nav-item active'
+                    : 'sidebar-nav-item'
+                }`}
+              >
+                <div className="flex items-center gap-3 min-w-0">
+                  <Briefcase className="w-4 h-4 shrink-0" />
+                  <span className="truncate">Employer Approvals</span>
+                </div>
+                <span className="px-2 py-0.5 rounded-full text-[10px] bg-surface-hover text-text-secondary tabular-nums font-semibold shrink-0">
+                  {pendingEmployers.length}
+                </span>
+              </button>
 
-            <button
-              onClick={() => setActiveTab('users')}
-              className={`btn-press px-4 py-2 rounded-full text-xs font-medium flex items-center gap-2 whitespace-nowrap transition-all duration-200 ${
-                activeTab === 'users'
-                  ? 'glass-pill bg-white dark:bg-white/20 text-neutral-950 dark:text-white shadow-glass-sm font-semibold border-white/70 dark:border-white/20'
-                  : 'text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-white hover:bg-white/30 dark:hover:bg-white/5'
-              }`}
-            >
-              <Users className="w-4 h-4" />
-              <span>User Profiles Directory</span>
-              <span className="px-2 py-0.5 rounded-full text-[10px] bg-black/5 dark:bg-white/10 text-neutral-700 dark:text-neutral-300 tabular-nums font-semibold">
-                {allUsers.length}
-              </span>
-            </button>
+              <button
+                onClick={() => setActiveTab('users')}
+                className={`transition-transform active:scale-95 px-4 py-3 rounded-xl text-sm font-medium flex items-center justify-between gap-3 whitespace-nowrap lg:w-full transition-all duration-200 ${
+                  activeTab === 'users'
+                    ? 'sidebar-nav-item active'
+                    : 'sidebar-nav-item'
+                }`}
+              >
+                <div className="flex items-center gap-3 min-w-0">
+                  <Users className="w-4 h-4 shrink-0" />
+                  <span className="truncate">User Profiles Directory</span>
+                </div>
+                <span className="px-2 py-0.5 rounded-full text-[10px] bg-surface-hover text-text-secondary tabular-nums font-semibold shrink-0">
+                  {allUsers.length}
+                </span>
+              </button>
+            </div>
           </div>
 
-        {/* Tab 1: Universities */}
+          {/* Content Area */}
+          <div className="flex-1 card-elevated p-6 rounded-2xl shadow-card-elevated shadow-lg overflow-hidden min-h-[500px]">
+          {/* Tab 1: Universities */}
         {activeTab === 'universities' && (
           <div className="p-6">
             {pendingUnis.length === 0 ? (
-              <div className="py-14 text-center text-neutral-500 dark:text-neutral-400">
-                <div className="w-12 h-12 rounded-2xl glass-secondary flex items-center justify-center mx-auto mb-3 text-neutral-400">
+              <div className="py-14 text-center text-text-muted">
+                <div className="w-12 h-12 rounded-2xl card flex items-center justify-center mx-auto mb-3 text-text-disabled">
                   <Building2 className="w-6 h-6" />
                 </div>
-                <p className="font-semibold text-neutral-800 dark:text-neutral-200 text-sm">No Pending University Registrations</p>
-                <p className="text-xs text-neutral-500 dark:text-neutral-400 mt-1">All university onboarding submissions have been reviewed.</p>
+                <p className="font-semibold text-text-primary text-sm">No Pending University Registrations</p>
+                <p className="text-xs text-text-muted mt-1">All university onboarding submissions have been reviewed.</p>
               </div>
             ) : (
-              <div className="overflow-x-auto rounded-2xl border border-black/5 dark:border-white/10">
+              <div className="overflow-x-auto rounded-2xl border border-border-subtle">
                 <table className="w-full text-left text-xs">
-                  <thead className="text-[11px] font-semibold uppercase tracking-wider bg-black/[0.02] dark:bg-white/[0.02] text-neutral-500 dark:text-neutral-400 border-b border-black/5 dark:border-white/10">
+                  <thead className="text-[11px] font-semibold uppercase tracking-wider bg-black/[0.02] dark:bg-white/[0.02] text-text-muted border-b border-border-subtle">
                     <tr>
                       <th className="py-3.5 px-4 font-semibold">University Name</th>
                       <th className="py-3.5 px-4 font-semibold">Code / Campus</th>
@@ -213,32 +224,32 @@ export default function AdminDashboard() {
                   <tbody className="divide-y divide-black/5 dark:divide-white/5">
                     {pendingUnis.map((uni) => (
                       <tr key={uni._id} className="hover:bg-white/50 dark:hover:bg-white/[0.03] transition-colors">
-                        <td className="py-4 px-4 font-semibold text-neutral-900 dark:text-neutral-100">{uni.name}</td>
-                        <td className="py-4 px-4 text-neutral-600 dark:text-neutral-300">
-                          <span className="glass-pill px-2 py-0.5 text-[11px] font-mono font-medium mr-1.5">
+                        <td className="py-4 px-4 font-semibold text-text-primary dark:text-neutral-100">{uni.name}</td>
+                        <td className="py-4 px-4 text-text-secondary">
+                          <span className="bg-secondary text-text-secondary border border-border-subtle rounded-full px-2 py-0.5 text-[11px] font-mono font-medium mr-1.5">
                             {uni.code || 'N/A'}
                           </span>
                           {uni.location}
                         </td>
                         <td className="py-4 px-4">
-                          <div className="font-medium text-neutral-900 dark:text-white">{uni.headUserId?.name || 'Assigned Dean'}</div>
-                          <div className="text-[11px] text-neutral-500 dark:text-neutral-400">{uni.headUserId?.email} • {uni.headUserId?.phone || 'No phone'}</div>
+                          <div className="font-medium text-text-primary">{uni.headUserId?.name || 'Assigned Dean'}</div>
+                          <div className="text-[11px] text-text-muted">{uni.headUserId?.email} • {uni.headUserId?.phone || 'No phone'}</div>
                         </td>
-                        <td className="py-4 px-4 text-neutral-500 dark:text-neutral-400 tabular-nums">
+                        <td className="py-4 px-4 text-text-muted tabular-nums">
                           {new Date(uni.createdAt).toLocaleDateString()}
                         </td>
-                        <td className="py-4 px-4 text-right space-x-2">
+                        <td className="py-4 px-4 flex flex-wrap items-center justify-end gap-2">
                           <button
                             onClick={() => handleReviewUniversity(uni._id, 'approved')}
                             disabled={actionLoading[uni._id]}
-                            className="btn-liquid-primary inline-flex items-center gap-1.5 text-xs font-semibold px-3.5 py-1.5 rounded-xl shadow-glass-sm"
+                            className="btn-primary inline-flex items-center gap-1.5 text-xs font-semibold px-3.5 py-1.5 rounded-xl shadow-sm"
                           >
                             <Check className="w-3.5 h-3.5" /> Authorize
                           </button>
                           <button
                             onClick={() => handleReviewUniversity(uni._id, 'rejected')}
                             disabled={actionLoading[uni._id]}
-                            className="glass-hover inline-flex items-center gap-1.5 text-xs font-medium bg-rose-500/10 hover:bg-rose-500/20 text-rose-700 dark:text-rose-400 border border-rose-500/30 px-3.5 py-1.5 rounded-xl transition"
+                            className="btn-danger inline-flex items-center gap-1.5 text-xs font-semibold px-3.5 py-1.5 rounded-xl shadow-sm"
                           >
                             <X className="w-3.5 h-3.5" /> Decline
                           </button>
@@ -256,17 +267,17 @@ export default function AdminDashboard() {
         {activeTab === 'employers' && (
           <div className="p-6">
             {pendingEmployers.length === 0 ? (
-              <div className="py-14 text-center text-neutral-500 dark:text-neutral-400">
-                <div className="w-12 h-12 rounded-2xl glass-secondary flex items-center justify-center mx-auto mb-3 text-neutral-400">
+              <div className="py-14 text-center text-text-muted">
+                <div className="w-12 h-12 rounded-2xl card flex items-center justify-center mx-auto mb-3 text-text-disabled">
                   <Briefcase className="w-6 h-6" />
                 </div>
-                <p className="font-semibold text-neutral-800 dark:text-neutral-200 text-sm">No Pending Employer Registrations</p>
-                <p className="text-xs text-neutral-500 dark:text-neutral-400 mt-1">All corporate recruiter submissions are up to date.</p>
+                <p className="font-semibold text-text-primary text-sm">No Pending Employer Registrations</p>
+                <p className="text-xs text-text-muted mt-1">All corporate recruiter submissions are up to date.</p>
               </div>
             ) : (
-              <div className="overflow-x-auto rounded-2xl border border-black/5 dark:border-white/10">
+              <div className="overflow-x-auto rounded-2xl border border-border-subtle">
                 <table className="w-full text-left text-xs">
-                  <thead className="text-[11px] font-semibold uppercase tracking-wider bg-black/[0.02] dark:bg-white/[0.02] text-neutral-500 dark:text-neutral-400 border-b border-black/5 dark:border-white/10">
+                  <thead className="text-[11px] font-semibold uppercase tracking-wider bg-black/[0.02] dark:bg-white/[0.02] text-text-muted border-b border-border-subtle">
                     <tr>
                       <th className="py-3.5 px-4 font-semibold">Company Name</th>
                       <th className="py-3.5 px-4 font-semibold">Industry Sector</th>
@@ -278,31 +289,31 @@ export default function AdminDashboard() {
                   <tbody className="divide-y divide-black/5 dark:divide-white/5">
                     {pendingEmployers.map((emp) => (
                       <tr key={emp._id} className="hover:bg-white/50 dark:hover:bg-white/[0.03] transition-colors">
-                        <td className="py-4 px-4 font-semibold text-neutral-900 dark:text-neutral-100">{emp.companyName || emp.name}</td>
+                        <td className="py-4 px-4 font-semibold text-text-primary dark:text-neutral-100">{emp.companyName || emp.name}</td>
                         <td className="py-4 px-4">
-                          <span className="glass-pill px-2.5 py-0.5 text-[11px] font-medium text-neutral-800 dark:text-neutral-200">
+                          <span className="bg-secondary text-text-secondary border border-border-subtle rounded-full px-2.5 py-0.5 text-[11px] font-medium text-text-primary">
                             {emp.companyCategory || 'General IT'}
                           </span>
                         </td>
                         <td className="py-4 px-4">
-                          <div className="font-medium text-neutral-900 dark:text-white">{emp.name}</div>
-                          <div className="text-[11px] text-neutral-500 dark:text-neutral-400">{emp.email} • {emp.phone || 'No phone'}</div>
+                          <div className="font-medium text-text-primary">{emp.name}</div>
+                          <div className="text-[11px] text-text-muted">{emp.email} • {emp.phone || 'No phone'}</div>
                         </td>
-                        <td className="py-4 px-4 text-neutral-500 dark:text-neutral-400 tabular-nums">
+                        <td className="py-4 px-4 text-text-muted tabular-nums">
                           {new Date(emp.createdAt).toLocaleDateString()}
                         </td>
-                        <td className="py-4 px-4 text-right space-x-2">
+                        <td className="py-4 px-4 flex flex-wrap items-center justify-end gap-2">
                           <button
                             onClick={() => handleReviewEmployer(emp._id, 'approved')}
                             disabled={actionLoading[emp._id]}
-                            className="btn-liquid-primary inline-flex items-center gap-1.5 text-xs font-semibold px-3.5 py-1.5 rounded-xl shadow-glass-sm"
+                            className="btn-primary inline-flex items-center gap-1.5 text-xs font-semibold px-3.5 py-1.5 rounded-xl shadow-sm"
                           >
                             <Check className="w-3.5 h-3.5" /> Verify
                           </button>
                           <button
                             onClick={() => handleReviewEmployer(emp._id, 'rejected')}
                             disabled={actionLoading[emp._id]}
-                            className="glass-hover inline-flex items-center gap-1.5 text-xs font-medium bg-rose-500/10 hover:bg-rose-500/20 text-rose-700 dark:text-rose-400 border border-rose-500/30 px-3.5 py-1.5 rounded-xl transition"
+                            className="btn-danger inline-flex items-center gap-1.5 text-xs font-semibold px-3.5 py-1.5 rounded-xl shadow-sm"
                           >
                             <X className="w-3.5 h-3.5" /> Decline
                           </button>
@@ -319,20 +330,20 @@ export default function AdminDashboard() {
         {/* Tab 3: All Profiles */}
         {activeTab === 'users' && (
           <div className="p-6 space-y-4">
-            <div className="flex items-center gap-2 glass-input px-3.5 py-2.5 max-w-sm rounded-xl">
-              <Search className="w-4 h-4 text-neutral-400 shrink-0" />
+            <div className="flex items-center gap-2 input-field px-3.5 py-2.5 max-w-sm rounded-xl">
+              <Search className="w-4 h-4 text-text-disabled shrink-0" />
               <input
                 type="text"
                 placeholder="Search by name, email, or role..."
                 value={search}
                 onChange={(e) => setSearch(e.target.value)}
-                className="bg-transparent text-xs w-full outline-none text-neutral-900 dark:text-white placeholder:text-neutral-400 dark:placeholder:text-neutral-500"
+                className="bg-transparent text-xs w-full outline-none text-text-primary placeholder:text-text-disabled dark:placeholder:text-text-muted"
               />
             </div>
 
-            <div className="overflow-x-auto rounded-2xl border border-black/5 dark:border-white/10">
+            <div className="overflow-x-auto rounded-2xl border border-border-subtle">
               <table className="w-full text-left text-xs">
-                <thead className="text-[11px] font-semibold uppercase tracking-wider bg-black/[0.02] dark:bg-white/[0.02] text-neutral-500 dark:text-neutral-400 border-b border-black/5 dark:border-white/10">
+                <thead className="text-[11px] font-semibold uppercase tracking-wider bg-black/[0.02] dark:bg-white/[0.02] text-text-muted border-b border-border-subtle">
                   <tr>
                     <th className="py-3.5 px-4 font-semibold">User</th>
                     <th className="py-3.5 px-4 font-semibold">Role</th>
@@ -346,21 +357,21 @@ export default function AdminDashboard() {
                   {filteredUsers.map((u) => (
                     <tr key={u._id} className="hover:bg-white/50 dark:hover:bg-white/[0.03] transition-colors">
                       <td className="py-4 px-4">
-                        <div className="font-semibold text-neutral-900 dark:text-white">{u.name}</div>
-                        <div className="text-[11px] text-neutral-500 dark:text-neutral-400">{u.email}</div>
+                        <div className="font-semibold text-text-primary">{u.name}</div>
+                        <div className="text-[11px] text-text-muted">{u.email}</div>
                       </td>
                       <td className="py-4 px-4">
-                        <span className="glass-pill text-[10px] font-semibold capitalize text-neutral-800 dark:text-neutral-200 px-2.5 py-0.5">
+                        <span className="bg-secondary text-text-secondary border border-border-subtle rounded-full text-[10px] font-semibold capitalize text-text-primary px-2.5 py-0.5">
                           {u.role}
                         </span>
                       </td>
-                      <td className="py-4 px-4 text-neutral-700 dark:text-neutral-300 text-xs font-medium">
+                      <td className="py-4 px-4 text-text-secondary text-xs font-medium">
                         {u.universityId?.name || u.companyName || '—'}
                       </td>
                       <td className="py-4 px-4">
                         <StatusBadge status={u.status} size="sm" />
                       </td>
-                      <td className="py-4 px-4 text-neutral-500 dark:text-neutral-400 tabular-nums">
+                      <td className="py-4 px-4 text-text-muted tabular-nums">
                         {new Date(u.createdAt).toLocaleDateString()}
                       </td>
                       <td className="py-4 px-4 text-right">
@@ -368,7 +379,7 @@ export default function AdminDashboard() {
                           <button
                             onClick={() => handleRemoveUser(u._id, u.name)}
                             disabled={actionLoading[u._id]}
-                            className="glass-hover inline-flex items-center gap-1.5 text-xs font-medium text-rose-600 dark:text-rose-400 hover:bg-rose-500/10 px-3 py-1 rounded-xl border border-transparent hover:border-rose-500/30 transition"
+                            className="hover-card-effect inline-flex items-center gap-1.5 text-xs font-medium text-rose-600 dark:text-rose-400 hover:bg-rose-500/10 px-3 py-1 rounded-xl border border-transparent hover:border-rose-500/30 transition"
                             title="Remove user"
                           >
                             <Trash2 className="w-3.5 h-3.5" /> Delete
@@ -382,6 +393,7 @@ export default function AdminDashboard() {
             </div>
           </div>
         )}
+        </div>
       </div>
     </div>
   </div>

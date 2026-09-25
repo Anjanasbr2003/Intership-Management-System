@@ -1,4 +1,5 @@
 const { University, User, StudentProfile, JobPosting } = require('../models');
+const { sequelize } = require('../config/db');
 const bcrypt = require('bcryptjs');
 
 // @desc    Get dashboard statistics for Admin
@@ -76,27 +77,32 @@ const getPendingUniversities = async (req, res) => {
 // @route   PATCH /api/admin/universities/:id/status
 // @access  Private (Admin)
 const reviewUniversity = async (req, res) => {
+  const transaction = await sequelize.transaction();
   try {
     const { status } = req.body;
     if (!['approved', 'rejected'].includes(status)) {
+      await transaction.rollback();
       return res.status(400).json({ message: 'Invalid status. Must be approved or rejected.' });
     }
 
-    const university = await University.findByPk(req.params.id);
+    const university = await University.findByPk(req.params.id, { transaction });
     if (!university) {
+      await transaction.rollback();
       return res.status(404).json({ message: 'University not found' });
     }
 
     university.status = status;
     university.reviewedBy = req.user.id;
-    await university.save();
+    await university.save({ transaction });
 
     if (university.headUserId) {
       await User.update(
         { status: status === 'approved' ? 'approved' : 'rejected' },
-        { where: { id: university.headUserId } }
+        { where: { id: university.headUserId }, transaction }
       );
     }
+
+    await transaction.commit();
 
     res.json({
       success: true,
@@ -104,6 +110,7 @@ const reviewUniversity = async (req, res) => {
       university,
     });
   } catch (error) {
+    await transaction.rollback();
     res.status(500).json({ message: error.message });
   }
 };

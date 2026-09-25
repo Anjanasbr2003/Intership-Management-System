@@ -69,6 +69,18 @@ const register = async (req, res) => {
       return res.status(400).json({ message: 'Name, email, password, and role are required.' });
     }
 
+    // Security Hardening: Block privilege escalation - admin role cannot be self-registered
+    const ALLOWED_PUBLIC_ROLES = ['student', 'employer', 'head', 'supervisor'];
+    if (!ALLOWED_PUBLIC_ROLES.includes(role)) {
+      logSecurityEvent({
+        type: 'PRIVILEGE_ESCALATION_BLOCKED',
+        severity: 'WARN',
+        ip: req.ip || req.connection?.remoteAddress,
+        details: `Blocked public registration attempt with restricted role: '${role}'`,
+      });
+      return res.status(403).json({ message: 'Registration with this role is not permitted.' });
+    }
+
     const existingUser = await User.findOne({ where: { email: email.toLowerCase() } });
     if (existingUser) {
       return res.status(400).json({ message: 'A user with this email is already registered.' });
@@ -78,7 +90,7 @@ const register = async (req, res) => {
     const hashedPassword = await bcrypt.hash(password, salt);
 
     let initialStatus = 'pending';
-    if (role === 'student' || role === 'admin') {
+    if (role === 'student') {
       initialStatus = 'active'; // Students activate immediately per FR-06
     }
 

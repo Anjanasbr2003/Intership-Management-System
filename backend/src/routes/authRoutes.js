@@ -11,7 +11,7 @@ const {
   updateProfilePicture,
 } = require('../controllers/authController');
 const { protect } = require('../middleware/auth');
-const { authLimiter, passwordResetLimiter } = require('../middleware/rateLimiter');
+const { authLimiter, passwordResetLimiter, uploadLimiter } = require('../middleware/rateLimiter');
 const { uploadImage } = require('../middleware/upload');
 
 // Rate-limited authentication endpoints
@@ -19,7 +19,7 @@ router.post('/register', authLimiter, register);
 router.post('/login', authLimiter, login);
 
 // Image upload during registration (Public)
-router.post('/upload-image', authLimiter, uploadImage.single('image'), uploadRegistrationImage);
+router.post('/upload-image', uploadLimiter, uploadImage.single('image'), uploadRegistrationImage);
 
 // Profile picture upload / update for logged-in user accounts (Private)
 router.post('/profile-picture', protect, uploadImage.single('image'), updateProfilePicture);
