@@ -194,20 +194,20 @@ export default function Register() {
       <PageBackground variant="register" />
       <div className="sm:mx-auto sm:w-full sm:max-w-3xl text-center mb-6 relative z-10 animate-applePageEnter">
         <InterlinkLogo className="w-12 h-12 mb-3 mx-auto" />
-        <h1 className="text-2xl font-bold text-neutral-900 dark:text-neutral-50 tracking-tight">Create an Interlink Account</h1>
-        <p className="mt-1 text-xs text-neutral-500 dark:text-neutral-400 font-medium">
-          National University Internship & Placement Platform
+        <h1 className="text-2xl font-bold text-text-primary tracking-tight">Create an Account</h1>
+        <p className="mt-1 text-xs text-text-muted font-medium">
+          Internship Management System &bull; University & Industry Portal
         </p>
       </div>
 
       <div className="sm:mx-auto sm:w-full sm:max-w-3xl relative z-10 animate-applePageEnter">
-        <div className="glass-form py-8 px-6 sm:px-10 rounded-2xl shadow-glass-floating">
+        <div className="card-elevated p-6 py-8 px-6 sm:px-10 rounded-2xl shadow-card-elevated shadow-lg">
           {/* Segmented Role Selector */}
           <div className="mb-6">
-            <label className="block text-xs font-semibold text-neutral-700 dark:text-neutral-300 mb-2">
+            <label className="block text-xs font-semibold text-text-secondary mb-2">
               Select Stakeholder Role
             </label>
-            <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 p-1.5 glass-secondary rounded-2xl">
+            <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 p-1.5 card rounded-2xl">
               {roles.map((r) => {
                 const Icon = r.icon;
                 const isSelected = role === r.id;
@@ -216,13 +216,13 @@ export default function Register() {
                     key={r.id}
                     type="button"
                     onClick={() => setRole(r.id)}
-                    className={`btn-press flex items-center justify-center gap-2 py-2.5 px-3 rounded-xl text-xs font-medium transition-all duration-200 ${
+                    className={`transition-transform active:scale-95 flex items-center justify-center gap-2 py-2.5 px-3 rounded-xl text-xs font-medium transition-all duration-200 ${
                       isSelected
-                        ? 'bg-white dark:bg-white/20 text-neutral-900 dark:text-white shadow-glass-sm font-semibold border border-white/60 dark:border-white/20'
-                        : 'text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-white hover:bg-white/40 dark:hover:bg-white/5'
+                        ? 'bg-surface-elevated text-text-primary shadow-sm font-semibold border border-white/60 dark:border-white/20'
+                        : 'text-text-muted hover:text-text-primary hover:bg-surface-hover'
                     }`}
                   >
-                    <Icon className={`w-4 h-4 shrink-0 ${isSelected ? 'text-blue-600 dark:text-blue-400' : 'text-neutral-400'}`} />
+                    <Icon className={`w-4 h-4 shrink-0 ${isSelected ? 'text-primary' : 'text-text-disabled'}`} />
                     <span>{r.label}</span>
                   </button>
                 );
@@ -231,14 +231,14 @@ export default function Register() {
           </div>
 
           {error && (
-            <div className="mb-5 glass-card bg-rose-500/10 dark:bg-rose-950/40 border border-rose-500/30 text-rose-700 dark:text-rose-300 px-3.5 py-2.5 rounded-xl text-xs flex items-center gap-2">
+            <div className="mb-5 badge-error px-3.5 py-2.5 rounded-xl text-xs flex items-center gap-2">
               <AlertCircle className="w-4 h-4 shrink-0 text-rose-500" />
               <span>{error}</span>
             </div>
           )}
 
           {success && (
-            <div className="mb-5 glass-card bg-emerald-500/10 dark:bg-emerald-950/40 border border-emerald-500/30 text-emerald-800 dark:text-emerald-200 px-3.5 py-2.5 rounded-xl text-xs flex items-center gap-2">
+            <div className="mb-5 badge-success px-3.5 py-2.5 rounded-xl text-xs flex items-center gap-2">
               <CheckCircle2 className="w-4 h-4 shrink-0 text-emerald-500" />
               <span>{success}</span>
             </div>
@@ -248,12 +248,12 @@ export default function Register() {
             {/* HEAD */}
             {role === 'head' && (
               <div className="space-y-4">
-                <div className="glass-secondary p-4 rounded-2xl border border-blue-500/20 bg-blue-500/5 text-xs text-neutral-600 dark:text-neutral-300 leading-relaxed">
-                  <span className="font-semibold text-neutral-900 dark:text-white">Faculty Leadership Registration:</span> Authorized Deans and Department Heads can register institution profiles. Admin authorization is required prior to faculty supervision activities.
+                <div className="card p-4 rounded-2xl border badge-info text-xs text-text-secondary leading-relaxed">
+                  <span className="font-semibold text-text-primary">Faculty Leadership Registration:</span> Authorized Deans and Department Heads can register institution profiles. Admin authorization is required prior to faculty supervision activities.
                 </div>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
                   <div className="sm:col-span-2">
-                    <label className="block text-xs font-semibold text-neutral-700 dark:text-neutral-300 mb-1">
+                    <label className="block text-xs font-semibold text-text-secondary mb-1">
                       University (Select from Master Registry) *
                     </label>
                     <select
@@ -261,7 +261,7 @@ export default function Register() {
                       required
                       value={formData.universityName}
                       onChange={handleChange}
-                      className="glass-input w-full h-11 px-3.5 rounded-xl text-sm font-medium text-neutral-900 dark:text-white"
+                      className="input-field w-full h-11 px-3.5 rounded-xl text-sm font-medium text-text-primary"
                     >
                       {masterUnis.map((u, i) => (
                         <option key={i} value={u.name} className="dark:bg-neutral-900">{u.name} ({u.type})</option>
@@ -269,24 +269,24 @@ export default function Register() {
                     </select>
                   </div>
                   <div>
-                    <label className="block text-xs font-semibold text-neutral-700 dark:text-neutral-300 mb-1">Applier Full Name *</label>
-                    <input type="text" name="name" required placeholder="Prof. Ananda Jayawardena" value={formData.name} onChange={handleChange} className="glass-input w-full h-11 px-3.5 rounded-xl text-sm font-medium text-neutral-900 dark:text-white placeholder:text-neutral-400" />
+                    <label className="block text-xs font-semibold text-text-secondary mb-1">Applier Full Name *</label>
+                    <input type="text" name="name" required placeholder="Prof. Ananda Jayawardena" value={formData.name} onChange={handleChange} className="input-field w-full h-11 px-3.5 rounded-xl text-sm font-medium text-text-primary placeholder:text-text-disabled" />
                   </div>
                   <div>
-                    <label className="block text-xs font-semibold text-neutral-700 dark:text-neutral-300 mb-1">Designation / Position *</label>
-                    <input type="text" name="applierPosition" required placeholder="Dean / HOD" value={formData.applierPosition} onChange={handleChange} className="glass-input w-full h-11 px-3.5 rounded-xl text-sm font-medium text-neutral-900 dark:text-white placeholder:text-neutral-400" />
+                    <label className="block text-xs font-semibold text-text-secondary mb-1">Designation / Position *</label>
+                    <input type="text" name="applierPosition" required placeholder="Dean / HOD" value={formData.applierPosition} onChange={handleChange} className="input-field w-full h-11 px-3.5 rounded-xl text-sm font-medium text-text-primary placeholder:text-text-disabled" />
                   </div>
                   <div>
-                    <label className="block text-xs font-semibold text-neutral-700 dark:text-neutral-300 mb-1">Official University Email *</label>
-                    <input type="email" name="email" required placeholder="dean@fot.ruh.ac.lk" value={formData.email} onChange={handleChange} className="glass-input w-full h-11 px-3.5 rounded-xl text-sm font-medium text-neutral-900 dark:text-white placeholder:text-neutral-400" />
+                    <label className="block text-xs font-semibold text-text-secondary mb-1">Official University Email *</label>
+                    <input type="email" name="email" required placeholder="dean@fot.ruh.ac.lk" value={formData.email} onChange={handleChange} className="input-field w-full h-11 px-3.5 rounded-xl text-sm font-medium text-text-primary placeholder:text-text-disabled" />
                   </div>
                   <div>
-                    <label className="block text-xs font-semibold text-neutral-700 dark:text-neutral-300 mb-1">Official Contact Number *</label>
-                    <input type="text" name="phone" required placeholder="+94 41 222 3333" value={formData.phone} onChange={handleChange} className="glass-input w-full h-11 px-3.5 rounded-xl text-sm font-medium text-neutral-900 dark:text-white placeholder:text-neutral-400" />
+                    <label className="block text-xs font-semibold text-text-secondary mb-1">Official Contact Number *</label>
+                    <input type="text" name="phone" required placeholder="+94 41 222 3333" value={formData.phone} onChange={handleChange} className="input-field w-full h-11 px-3.5 rounded-xl text-sm font-medium text-text-primary placeholder:text-text-disabled" />
                   </div>
                   <div className="sm:col-span-2">
-                    <label className="block text-xs font-semibold text-neutral-700 dark:text-neutral-300 mb-1">Password *</label>
-                    <input type="password" name="password" required placeholder="••••••••" value={formData.password} onChange={handleChange} className="glass-input w-full h-11 px-3.5 rounded-xl text-sm font-medium text-neutral-900 dark:text-white placeholder:text-neutral-400" />
+                    <label className="block text-xs font-semibold text-text-secondary mb-1">Password *</label>
+                    <input type="password" name="password" required placeholder="••••••••" value={formData.password} onChange={handleChange} className="input-field w-full h-11 px-3.5 rounded-xl text-sm font-medium text-text-primary placeholder:text-text-disabled" />
                   </div>
                 </div>
               </div>
@@ -294,50 +294,50 @@ export default function Register() {
             {/* SUPERVISOR */}
             {role === 'supervisor' && (
               <div className="space-y-4">
-                <div className="glass-secondary p-4 rounded-2xl border border-blue-500/20 bg-blue-500/5 text-xs text-neutral-600 dark:text-neutral-300 leading-relaxed">
-                  <span className="font-semibold text-neutral-900 dark:text-white">Academic Supervisor Registration:</span> Register with your faculty staff number. A join authorization request will be transmitted to your University Head.
+                <div className="card p-4 rounded-2xl border badge-info text-xs text-text-secondary leading-relaxed">
+                  <span className="font-semibold text-text-primary">Academic Supervisor Registration:</span> Register with your faculty staff number. A join authorization request will be transmitted to your University Head.
                 </div>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
                   <div>
-                    <label className="block text-xs font-semibold text-neutral-700 dark:text-neutral-300 mb-1">Supervisor Full Name *</label>
-                    <input type="text" name="name" required placeholder="Dr. Kasun Wickramasinghe" value={formData.name} onChange={handleChange} className="glass-input w-full h-11 px-3.5 rounded-xl text-sm font-medium text-neutral-900 dark:text-white placeholder:text-neutral-400" />
+                    <label className="block text-xs font-semibold text-text-secondary mb-1">Supervisor Full Name *</label>
+                    <input type="text" name="name" required placeholder="Dr. Kasun Wickramasinghe" value={formData.name} onChange={handleChange} className="input-field w-full h-11 px-3.5 rounded-xl text-sm font-medium text-text-primary placeholder:text-text-disabled" />
                   </div>
                   <div>
-                    <label className="block text-xs font-semibold text-neutral-700 dark:text-neutral-300 mb-1">Assigned University *</label>
-                    <select name="universityId" required value={formData.universityId} onChange={handleChange} className="glass-input w-full h-11 px-3.5 rounded-xl text-sm font-medium text-neutral-900 dark:text-white">
+                    <label className="block text-xs font-semibold text-text-secondary mb-1">Assigned University *</label>
+                    <select name="universityId" required value={formData.universityId} onChange={handleChange} className="input-field w-full h-11 px-3.5 rounded-xl text-sm font-medium text-text-primary">
                       {approvedUnis.map((u) => (
                         <option key={u._id} value={u._id} className="dark:bg-neutral-900">{u.name} ({u.code})</option>
                       ))}
                     </select>
                   </div>
                   <div>
-                    <label className="block text-xs font-semibold text-neutral-700 dark:text-neutral-300 mb-1">University Position *</label>
-                    <input type="text" name="position" required placeholder="Senior Lecturer / Lecturer" value={formData.position} onChange={handleChange} className="glass-input w-full h-11 px-3.5 rounded-xl text-sm font-medium text-neutral-900 dark:text-white placeholder:text-neutral-400" />
+                    <label className="block text-xs font-semibold text-text-secondary mb-1">University Position *</label>
+                    <input type="text" name="position" required placeholder="Senior Lecturer / Lecturer" value={formData.position} onChange={handleChange} className="input-field w-full h-11 px-3.5 rounded-xl text-sm font-medium text-text-primary placeholder:text-text-disabled" />
                   </div>
                   <div>
-                    <label className="block text-xs font-semibold text-neutral-700 dark:text-neutral-300 mb-1">Academic Staff Reg No *</label>
-                    <input type="text" name="staffRegNo" required placeholder="STAFF/RUH/FOT/042" value={formData.staffRegNo} onChange={handleChange} className="glass-input w-full h-11 px-3.5 rounded-xl text-sm font-medium text-neutral-900 dark:text-white placeholder:text-neutral-400" />
+                    <label className="block text-xs font-semibold text-text-secondary mb-1">Academic Staff Reg No *</label>
+                    <input type="text" name="staffRegNo" required placeholder="STAFF/RUH/FOT/042" value={formData.staffRegNo} onChange={handleChange} className="input-field w-full h-11 px-3.5 rounded-xl text-sm font-medium text-text-primary placeholder:text-text-disabled" />
                   </div>
                   <div>
-                    <label className="block text-xs font-semibold text-neutral-700 dark:text-neutral-300 mb-1">University Email (Verification & Login) *</label>
-                    <input type="email" name="email" required placeholder="kasun.w@fot.ruh.ac.lk" value={formData.email} onChange={handleChange} className="glass-input w-full h-11 px-3.5 rounded-xl text-sm font-medium text-neutral-900 dark:text-white placeholder:text-neutral-400" />
+                    <label className="block text-xs font-semibold text-text-secondary mb-1">University Email (Verification & Login) *</label>
+                    <input type="email" name="email" required placeholder="kasun.w@fot.ruh.ac.lk" value={formData.email} onChange={handleChange} className="input-field w-full h-11 px-3.5 rounded-xl text-sm font-medium text-text-primary placeholder:text-text-disabled" />
                   </div>
                   <div>
-                    <label className="block text-xs font-semibold text-neutral-700 dark:text-neutral-300 mb-1">Personal Email (Optional - can also log in with this)</label>
-                    <input type="email" name="personalEmail" placeholder="kasun.personal@gmail.com" value={formData.personalEmail} onChange={handleChange} className="glass-input w-full h-11 px-3.5 rounded-xl text-sm font-medium text-neutral-900 dark:text-white placeholder:text-neutral-400" />
+                    <label className="block text-xs font-semibold text-text-secondary mb-1">Personal Email (Optional - can also log in with this)</label>
+                    <input type="email" name="personalEmail" placeholder="kasun.personal@gmail.com" value={formData.personalEmail} onChange={handleChange} className="input-field w-full h-11 px-3.5 rounded-xl text-sm font-medium text-text-primary placeholder:text-text-disabled" />
                   </div>
                   <div>
-                    <label className="block text-xs font-semibold text-neutral-700 dark:text-neutral-300 mb-1">Contact Number *</label>
-                    <input type="text" name="phone" required placeholder="+94 71 888 9999" value={formData.phone} onChange={handleChange} className="glass-input w-full h-11 px-3.5 rounded-xl text-sm font-medium text-neutral-900 dark:text-white placeholder:text-neutral-400" />
+                    <label className="block text-xs font-semibold text-text-secondary mb-1">Contact Number *</label>
+                    <input type="text" name="phone" required placeholder="+94 71 888 9999" value={formData.phone} onChange={handleChange} className="input-field w-full h-11 px-3.5 rounded-xl text-sm font-medium text-text-primary placeholder:text-text-disabled" />
                   </div>
                   <div>
-                    <label className="block text-xs font-semibold text-neutral-700 dark:text-neutral-300 mb-1">Password *</label>
-                    <input type="password" name="password" required placeholder="••••••••" value={formData.password} onChange={handleChange} className="glass-input w-full h-11 px-3.5 rounded-xl text-sm font-medium text-neutral-900 dark:text-white placeholder:text-neutral-400" />
+                    <label className="block text-xs font-semibold text-text-secondary mb-1">Password *</label>
+                    <input type="password" name="password" required placeholder="••••••••" value={formData.password} onChange={handleChange} className="input-field w-full h-11 px-3.5 rounded-xl text-sm font-medium text-text-primary placeholder:text-text-disabled" />
                   </div>
                 </div>
-                <div className="flex items-center gap-2.5 p-3.5 glass-secondary rounded-xl">
-                  <input type="checkbox" id="autoSend" name="autoSendJoinRequest" checked={formData.autoSendJoinRequest} onChange={handleChange} className="w-4 h-4 rounded text-blue-600 focus:ring-blue-500 accent-blue-600" />
-                  <label htmlFor="autoSend" className="text-xs font-medium text-neutral-700 dark:text-neutral-300 cursor-pointer">
+                <div className="flex items-center gap-2.5 p-3.5 card rounded-xl">
+                  <input type="checkbox" id="autoSend" name="autoSendJoinRequest" checked={formData.autoSendJoinRequest} onChange={handleChange} className="w-4 h-4 rounded text-primary focus:ring-primary accent-primary" />
+                  <label htmlFor="autoSend" className="text-xs font-medium text-text-secondary cursor-pointer">
                     Automatically route join request to University Head upon registration
                   </label>
                 </div>
@@ -349,44 +349,44 @@ export default function Register() {
               <div className="space-y-4">
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
                   <div>
-                    <label className="block text-xs font-semibold text-neutral-700 dark:text-neutral-300 mb-1">Full Name *</label>
-                    <input type="text" name="name" required placeholder="E. Tharinda Gimhana" value={formData.name} onChange={handleChange} className="glass-input w-full h-11 px-3.5 rounded-xl text-sm font-medium text-neutral-900 dark:text-white placeholder:text-neutral-400" />
+                    <label className="block text-xs font-semibold text-text-secondary mb-1">Full Name *</label>
+                    <input type="text" name="name" required placeholder="E. Tharinda Gimhana" value={formData.name} onChange={handleChange} className="input-field w-full h-11 px-3.5 rounded-xl text-sm font-medium text-text-primary placeholder:text-text-disabled" />
                   </div>
                   <div>
-                    <label className="block text-xs font-semibold text-neutral-700 dark:text-neutral-300 mb-1">Enrolled University *</label>
-                    <select name="universityId" required value={formData.universityId} onChange={handleChange} className="glass-input w-full h-11 px-3.5 rounded-xl text-sm font-medium text-neutral-900 dark:text-white">
+                    <label className="block text-xs font-semibold text-text-secondary mb-1">Enrolled University *</label>
+                    <select name="universityId" required value={formData.universityId} onChange={handleChange} className="input-field w-full h-11 px-3.5 rounded-xl text-sm font-medium text-text-primary">
                       {approvedUnis.map((u) => (
                         <option key={u._id} value={u._id} className="dark:bg-neutral-900">{u.name} ({u.code})</option>
                       ))}
                     </select>
                   </div>
                   <div>
-                    <label className="block text-xs font-semibold text-neutral-700 dark:text-neutral-300 mb-1">Student Reg No *</label>
-                    <input type="text" name="studentRegNo" required placeholder="TG/2023/1704" value={formData.studentRegNo} onChange={handleChange} className="glass-input w-full h-11 px-3.5 rounded-xl text-sm font-medium text-neutral-900 dark:text-white placeholder:text-neutral-400" />
+                    <label className="block text-xs font-semibold text-text-secondary mb-1">Student Reg No *</label>
+                    <input type="text" name="studentRegNo" required placeholder="TG/2023/1704" value={formData.studentRegNo} onChange={handleChange} className="input-field w-full h-11 px-3.5 rounded-xl text-sm font-medium text-text-primary placeholder:text-text-disabled" />
                   </div>
                   <div>
-                    <label className="block text-xs font-semibold text-neutral-700 dark:text-neutral-300 mb-1">Current Living City *</label>
-                    <input type="text" name="livingCity" required placeholder="Matara / Colombo" value={formData.livingCity} onChange={handleChange} className="glass-input w-full h-11 px-3.5 rounded-xl text-sm font-medium text-neutral-900 dark:text-white placeholder:text-neutral-400" />
+                    <label className="block text-xs font-semibold text-text-secondary mb-1">Current Living City *</label>
+                    <input type="text" name="livingCity" required placeholder="Matara / Colombo" value={formData.livingCity} onChange={handleChange} className="input-field w-full h-11 px-3.5 rounded-xl text-sm font-medium text-text-primary placeholder:text-text-disabled" />
                   </div>
                   <div>
-                    <label className="block text-xs font-semibold text-neutral-700 dark:text-neutral-300 mb-1">University / Institutional Email *</label>
-                    <input type="email" name="email" required placeholder="tharinda.g@fot.ruh.ac.lk" value={formData.email} onChange={handleChange} className="glass-input w-full h-11 px-3.5 rounded-xl text-sm font-medium text-neutral-900 dark:text-white placeholder:text-neutral-400" />
+                    <label className="block text-xs font-semibold text-text-secondary mb-1">University / Institutional Email *</label>
+                    <input type="email" name="email" required placeholder="tharinda.g@fot.ruh.ac.lk" value={formData.email} onChange={handleChange} className="input-field w-full h-11 px-3.5 rounded-xl text-sm font-medium text-text-primary placeholder:text-text-disabled" />
                   </div>
                   <div>
-                    <label className="block text-xs font-semibold text-neutral-700 dark:text-neutral-300 mb-1">Personal Email (Optional - can also log in with this)</label>
-                    <input type="email" name="personalEmail" placeholder="tharinda.personal@gmail.com" value={formData.personalEmail} onChange={handleChange} className="glass-input w-full h-11 px-3.5 rounded-xl text-sm font-medium text-neutral-900 dark:text-white placeholder:text-neutral-400" />
+                    <label className="block text-xs font-semibold text-text-secondary mb-1">Personal Email (Optional - can also log in with this)</label>
+                    <input type="email" name="personalEmail" placeholder="tharinda.personal@gmail.com" value={formData.personalEmail} onChange={handleChange} className="input-field w-full h-11 px-3.5 rounded-xl text-sm font-medium text-text-primary placeholder:text-text-disabled" />
                   </div>
                   <div>
-                    <label className="block text-xs font-semibold text-neutral-700 dark:text-neutral-300 mb-1">Phone Number *</label>
-                    <input type="text" name="phone" required placeholder="+94 76 987 6543" value={formData.phone} onChange={handleChange} className="glass-input w-full h-11 px-3.5 rounded-xl text-sm font-medium text-neutral-900 dark:text-white placeholder:text-neutral-400" />
+                    <label className="block text-xs font-semibold text-text-secondary mb-1">Phone Number *</label>
+                    <input type="text" name="phone" required placeholder="+94 76 987 6543" value={formData.phone} onChange={handleChange} className="input-field w-full h-11 px-3.5 rounded-xl text-sm font-medium text-text-primary placeholder:text-text-disabled" />
                   </div>
                   <div>
-                    <label className="block text-xs font-semibold text-neutral-700 dark:text-neutral-300 mb-1">Degree Program *</label>
-                    <input type="text" name="degreeProgram" required placeholder="BICT (Hons)" value={formData.degreeProgram} onChange={handleChange} className="glass-input w-full h-11 px-3.5 rounded-xl text-sm font-medium text-neutral-900 dark:text-white placeholder:text-neutral-400" />
+                    <label className="block text-xs font-semibold text-text-secondary mb-1">Degree Program *</label>
+                    <input type="text" name="degreeProgram" required placeholder="BICT (Hons)" value={formData.degreeProgram} onChange={handleChange} className="input-field w-full h-11 px-3.5 rounded-xl text-sm font-medium text-text-primary placeholder:text-text-disabled" />
                   </div>
                   <div>
-                    <label className="block text-xs font-semibold text-neutral-700 dark:text-neutral-300 mb-1">Primary Discipline *</label>
-                    <select name="mainCategory" value={formData.mainCategory} onChange={handleChange} className="glass-input w-full h-11 px-3.5 rounded-xl text-sm font-medium text-neutral-900 dark:text-white">
+                    <label className="block text-xs font-semibold text-text-secondary mb-1">Primary Discipline *</label>
+                    <select name="mainCategory" value={formData.mainCategory} onChange={handleChange} className="input-field w-full h-11 px-3.5 rounded-xl text-sm font-medium text-text-primary">
                       <option value="IT" className="dark:bg-neutral-900">IT</option>
                       <option value="Agriculture" className="dark:bg-neutral-900">Agriculture</option>
                       <option value="Science" className="dark:bg-neutral-900">Science & Biology</option>
@@ -396,42 +396,42 @@ export default function Register() {
                     </select>
                   </div>
                   <div>
-                    <label className="block text-xs font-semibold text-neutral-700 dark:text-neutral-300 mb-1">Target Field of Specialization *</label>
-                    <input type="text" name="desiredField" required placeholder="Full-Stack Web Engineering" value={formData.desiredField} onChange={handleChange} className="glass-input w-full h-11 px-3.5 rounded-xl text-sm font-medium text-neutral-900 dark:text-white placeholder:text-neutral-400" />
+                    <label className="block text-xs font-semibold text-text-secondary mb-1">Target Field of Specialization *</label>
+                    <input type="text" name="desiredField" required placeholder="Full-Stack Web Engineering" value={formData.desiredField} onChange={handleChange} className="input-field w-full h-11 px-3.5 rounded-xl text-sm font-medium text-text-primary placeholder:text-text-disabled" />
                   </div>
                   <div>
-                    <label className="block text-xs font-semibold text-neutral-700 dark:text-neutral-300 mb-1">Work Preference *</label>
-                    <select name="workType" value={formData.workType} onChange={handleChange} className="glass-input w-full h-11 px-3.5 rounded-xl text-sm font-medium text-neutral-900 dark:text-white">
+                    <label className="block text-xs font-semibold text-text-secondary mb-1">Work Preference *</label>
+                    <select name="workType" value={formData.workType} onChange={handleChange} className="input-field w-full h-11 px-3.5 rounded-xl text-sm font-medium text-text-primary">
                       <option value="Hybrid" className="dark:bg-neutral-900">Hybrid</option>
                       <option value="Remote" className="dark:bg-neutral-900">Remote</option>
                       <option value="Onsite" className="dark:bg-neutral-900">Onsite</option>
                     </select>
                   </div>
                   <div>
-                    <label className="block text-xs font-semibold text-neutral-700 dark:text-neutral-300 mb-1">Availability *</label>
-                    <select name="availability" value={formData.availability} onChange={handleChange} className="glass-input w-full h-11 px-3.5 rounded-xl text-sm font-medium text-neutral-900 dark:text-white">
+                    <label className="block text-xs font-semibold text-text-secondary mb-1">Availability *</label>
+                    <select name="availability" value={formData.availability} onChange={handleChange} className="input-field w-full h-11 px-3.5 rounded-xl text-sm font-medium text-text-primary">
                       <option value="Full-Time" className="dark:bg-neutral-900">Full-Time</option>
                       <option value="Part-Time" className="dark:bg-neutral-900">Part-Time</option>
                     </select>
                   </div>
                   <div>
-                    <label className="block text-xs font-semibold text-neutral-700 dark:text-neutral-300 mb-1">Current GPA</label>
-                    <input type="text" name="gpa" placeholder="3.82" value={formData.gpa} onChange={handleChange} className="glass-input w-full h-11 px-3.5 rounded-xl text-sm font-medium text-neutral-900 dark:text-white placeholder:text-neutral-400" />
+                    <label className="block text-xs font-semibold text-text-secondary mb-1">Current GPA</label>
+                    <input type="text" name="gpa" placeholder="3.82" value={formData.gpa} onChange={handleChange} className="input-field w-full h-11 px-3.5 rounded-xl text-sm font-medium text-text-primary placeholder:text-text-disabled" />
                   </div>
-                  <div className="sm:col-span-2 glass-secondary p-3.5 rounded-xl border border-white/60 dark:border-white/10">
+                  <div className="sm:col-span-2 card p-3.5 rounded-xl border border-white/60 dark:border-white/10">
                     <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-1 mb-2">
                       <label className="text-xs font-semibold text-neutral-800 dark:text-neutral-200 flex items-center gap-1.5">
-                        <Camera className="w-3.5 h-3.5 text-blue-600 dark:text-blue-400" />
+                        <Camera className="w-3.5 h-3.5 text-primary" />
                         <span>Profile Picture</span>
                       </label>
-                      <span className="text-[11px] text-neutral-500 dark:text-neutral-400 font-medium">
+                      <span className="text-[11px] text-text-muted font-medium">
                         Optional &bull; You can also upload later in your account
                       </span>
                     </div>
 
                     <div className="flex items-center gap-4">
                       {/* Avatar preview */}
-                      <div className="relative w-14 h-14 rounded-2xl overflow-hidden glass-primary flex items-center justify-center border border-white/80 dark:border-white/20 shadow-glass-sm shrink-0">
+                      <div className="relative w-14 h-14 rounded-2xl overflow-hidden card-elevated flex items-center justify-center border border-border-strong shadow-sm shrink-0">
                         {previewPic || formData.profilePic ? (
                           <img
                             src={previewPic || formData.profilePic}
@@ -439,7 +439,7 @@ export default function Register() {
                             className="w-full h-full object-cover"
                           />
                         ) : (
-                          <ImageIcon className="w-6 h-6 text-neutral-400 dark:text-neutral-500" />
+                          <ImageIcon className="w-6 h-6 text-text-disabled" />
                         )}
                         {uploadingPic && (
                           <div className="absolute inset-0 bg-black/40 backdrop-blur-xs flex items-center justify-center">
@@ -451,7 +451,7 @@ export default function Register() {
                       {/* Upload Controls */}
                       <div className="flex flex-col gap-1.5 flex-1">
                         <div className="flex items-center gap-2">
-                          <label className="btn-liquid-primary cursor-pointer text-xs font-semibold px-3.5 py-1.5 rounded-xl inline-flex items-center gap-1.5 shadow-glass-sm">
+                          <label className="btn-primary cursor-pointer text-xs font-semibold px-3.5 py-1.5 rounded-xl inline-flex items-center gap-1.5 shadow-sm">
                             <Upload className="w-3.5 h-3.5" />
                             <span>{formData.profilePic ? 'Change Image' : 'Upload Image'}</span>
                             <input
@@ -467,34 +467,34 @@ export default function Register() {
                             <button
                               type="button"
                               onClick={handleRemoveImage}
-                              className="btn-liquid p-1.5 text-rose-600 dark:text-rose-400 hover:bg-rose-500/10 rounded-xl transition border border-transparent hover:border-rose-500/20"
+                              className="transition-transform active:scale-95 p-1.5 text-rose-600 dark:text-rose-400 hover:bg-rose-500/10 rounded-xl transition border border-transparent hover:border-rose-500/20"
                               title="Remove photo"
                             >
                               <Trash2 className="w-3.5 h-3.5" />
                             </button>
                           )}
                         </div>
-                        <span className="text-[10px] text-neutral-500 dark:text-neutral-400">
+                        <span className="text-[10px] text-text-muted">
                           Supports JPG, PNG, WEBP or GIF up to 5MB
                         </span>
                       </div>
                     </div>
                   </div>
                   <div>
-                    <label className="block text-xs font-semibold text-neutral-700 dark:text-neutral-300 mb-1">LinkedIn Profile</label>
-                    <input type="url" name="linkedinUrl" placeholder="https://linkedin.com/in/..." value={formData.linkedinUrl} onChange={handleChange} className="glass-input w-full h-11 px-3.5 rounded-xl text-sm font-medium text-neutral-900 dark:text-white placeholder:text-neutral-400" />
+                    <label className="block text-xs font-semibold text-text-secondary mb-1">LinkedIn Profile</label>
+                    <input type="url" name="linkedinUrl" placeholder="https://linkedin.com/in/..." value={formData.linkedinUrl} onChange={handleChange} className="input-field w-full h-11 px-3.5 rounded-xl text-sm font-medium text-text-primary placeholder:text-text-disabled" />
                   </div>
                   <div>
-                    <label className="block text-xs font-semibold text-neutral-700 dark:text-neutral-300 mb-1">GitHub / Code Repository</label>
-                    <input type="url" name="githubUrl" placeholder="https://github.com/..." value={formData.githubUrl} onChange={handleChange} className="glass-input w-full h-11 px-3.5 rounded-xl text-sm font-medium text-neutral-900 dark:text-white placeholder:text-neutral-400" />
+                    <label className="block text-xs font-semibold text-text-secondary mb-1">GitHub / Code Repository</label>
+                    <input type="url" name="githubUrl" placeholder="https://github.com/..." value={formData.githubUrl} onChange={handleChange} className="input-field w-full h-11 px-3.5 rounded-xl text-sm font-medium text-text-primary placeholder:text-text-disabled" />
                   </div>
                   <div>
-                    <label className="block text-xs font-semibold text-neutral-700 dark:text-neutral-300 mb-1">Portfolio Link</label>
-                    <input type="url" name="portfolioUrl" placeholder="https://portfolio.dev" value={formData.portfolioUrl} onChange={handleChange} className="glass-input w-full h-11 px-3.5 rounded-xl text-sm font-medium text-neutral-900 dark:text-white placeholder:text-neutral-400" />
+                    <label className="block text-xs font-semibold text-text-secondary mb-1">Portfolio Link</label>
+                    <input type="url" name="portfolioUrl" placeholder="https://portfolio.dev" value={formData.portfolioUrl} onChange={handleChange} className="input-field w-full h-11 px-3.5 rounded-xl text-sm font-medium text-text-primary placeholder:text-text-disabled" />
                   </div>
                   <div>
-                    <label className="block text-xs font-semibold text-neutral-700 dark:text-neutral-300 mb-1">Account Password *</label>
-                    <input type="password" name="password" required placeholder="••••••••" value={formData.password} onChange={handleChange} className="glass-input w-full h-11 px-3.5 rounded-xl text-sm font-medium text-neutral-900 dark:text-white placeholder:text-neutral-400" />
+                    <label className="block text-xs font-semibold text-text-secondary mb-1">Account Password *</label>
+                    <input type="password" name="password" required placeholder="••••••••" value={formData.password} onChange={handleChange} className="input-field w-full h-11 px-3.5 rounded-xl text-sm font-medium text-text-primary placeholder:text-text-disabled" />
                   </div>
                 </div>
               </div>
@@ -505,12 +505,12 @@ export default function Register() {
               <div className="space-y-4">
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
                   <div>
-                    <label className="block text-xs font-semibold text-neutral-700 dark:text-neutral-300 mb-1">Company Legal Name *</label>
-                    <input type="text" name="companyName" required placeholder="Virtusa Sri Lanka" value={formData.companyName} onChange={handleChange} className="glass-input w-full h-11 px-3.5 rounded-xl text-sm font-medium text-neutral-900 dark:text-white placeholder:text-neutral-400" />
+                    <label className="block text-xs font-semibold text-text-secondary mb-1">Company Legal Name *</label>
+                    <input type="text" name="companyName" required placeholder="Virtusa Sri Lanka" value={formData.companyName} onChange={handleChange} className="input-field w-full h-11 px-3.5 rounded-xl text-sm font-medium text-text-primary placeholder:text-text-disabled" />
                   </div>
                   <div>
-                    <label className="block text-xs font-semibold text-neutral-700 dark:text-neutral-300 mb-1">Industry Sector *</label>
-                    <select name="companyCategory" value={formData.companyCategory} onChange={handleChange} className="glass-input w-full h-11 px-3.5 rounded-xl text-sm font-medium text-neutral-900 dark:text-white">
+                    <label className="block text-xs font-semibold text-text-secondary mb-1">Industry Sector *</label>
+                    <select name="companyCategory" value={formData.companyCategory} onChange={handleChange} className="input-field w-full h-11 px-3.5 rounded-xl text-sm font-medium text-text-primary">
                       <option value="IT sector" className="dark:bg-neutral-900">IT sector</option>
                       <option value="Biology" className="dark:bg-neutral-900">Biology & Science</option>
                       <option value="Documentation" className="dark:bg-neutral-900">Documentation & Management</option>
@@ -520,48 +520,48 @@ export default function Register() {
                     </select>
                   </div>
                   <div>
-                    <label className="block text-xs font-semibold text-neutral-700 dark:text-neutral-300 mb-1">Corporate Email Address *</label>
-                    <input type="email" name="email" required placeholder="careers@virtusa.com" value={formData.email} onChange={handleChange} className="glass-input w-full h-11 px-3.5 rounded-xl text-sm font-medium text-neutral-900 dark:text-white placeholder:text-neutral-400" />
+                    <label className="block text-xs font-semibold text-text-secondary mb-1">Corporate Email Address *</label>
+                    <input type="email" name="email" required placeholder="careers@virtusa.com" value={formData.email} onChange={handleChange} className="input-field w-full h-11 px-3.5 rounded-xl text-sm font-medium text-text-primary placeholder:text-text-disabled" />
                   </div>
                   <div>
-                    <label className="block text-xs font-semibold text-neutral-700 dark:text-neutral-300 mb-1">Corporate Contact Number *</label>
-                    <input type="text" name="phone" required placeholder="+94 11 472 8000" value={formData.phone} onChange={handleChange} className="glass-input w-full h-11 px-3.5 rounded-xl text-sm font-medium text-neutral-900 dark:text-white placeholder:text-neutral-400" />
+                    <label className="block text-xs font-semibold text-text-secondary mb-1">Corporate Contact Number *</label>
+                    <input type="text" name="phone" required placeholder="+94 11 472 8000" value={formData.phone} onChange={handleChange} className="input-field w-full h-11 px-3.5 rounded-xl text-sm font-medium text-text-primary placeholder:text-text-disabled" />
                   </div>
                   <div>
-                    <label className="block text-xs font-semibold text-neutral-700 dark:text-neutral-300 mb-1">Recruiter Full Name *</label>
-                    <input type="text" name="name" required placeholder="Kasun Wijesinghe" value={formData.name} onChange={handleChange} className="glass-input w-full h-11 px-3.5 rounded-xl text-sm font-medium text-neutral-900 dark:text-white placeholder:text-neutral-400" />
+                    <label className="block text-xs font-semibold text-text-secondary mb-1">Recruiter Full Name *</label>
+                    <input type="text" name="name" required placeholder="Kasun Wijesinghe" value={formData.name} onChange={handleChange} className="input-field w-full h-11 px-3.5 rounded-xl text-sm font-medium text-text-primary placeholder:text-text-disabled" />
                   </div>
                   <div>
-                    <label className="block text-xs font-semibold text-neutral-700 dark:text-neutral-300 mb-1">Recruiter Designation *</label>
-                    <input type="text" name="recruiterDesignation" required placeholder="Senior Talent Acquisition Lead" value={formData.recruiterDesignation} onChange={handleChange} className="glass-input w-full h-11 px-3.5 rounded-xl text-sm font-medium text-neutral-900 dark:text-white placeholder:text-neutral-400" />
+                    <label className="block text-xs font-semibold text-text-secondary mb-1">Recruiter Designation *</label>
+                    <input type="text" name="recruiterDesignation" required placeholder="Senior Talent Acquisition Lead" value={formData.recruiterDesignation} onChange={handleChange} className="input-field w-full h-11 px-3.5 rounded-xl text-sm font-medium text-text-primary placeholder:text-text-disabled" />
                   </div>
                   <div>
-                    <label className="block text-xs font-semibold text-neutral-700 dark:text-neutral-300 mb-1">Intern Recruitment Scope *</label>
-                    <input type="text" name="recruitmentArea" required placeholder="Western Province / Islandwide" value={formData.recruitmentArea} onChange={handleChange} className="glass-input w-full h-11 px-3.5 rounded-xl text-sm font-medium text-neutral-900 dark:text-white placeholder:text-neutral-400" />
+                    <label className="block text-xs font-semibold text-text-secondary mb-1">Intern Recruitment Scope *</label>
+                    <input type="text" name="recruitmentArea" required placeholder="Western Province / Islandwide" value={formData.recruitmentArea} onChange={handleChange} className="input-field w-full h-11 px-3.5 rounded-xl text-sm font-medium text-text-primary placeholder:text-text-disabled" />
                   </div>
                   <div>
-                    <label className="block text-xs font-semibold text-neutral-700 dark:text-neutral-300 mb-1">Recruiter Direct Phone (Optional)</label>
-                    <input type="text" name="recruiterContactNumber" placeholder="+94 77 111 2222" value={formData.recruiterContactNumber} onChange={handleChange} className="glass-input w-full h-11 px-3.5 rounded-xl text-sm font-medium text-neutral-900 dark:text-white placeholder:text-neutral-400" />
+                    <label className="block text-xs font-semibold text-text-secondary mb-1">Recruiter Direct Phone (Optional)</label>
+                    <input type="text" name="recruiterContactNumber" placeholder="+94 77 111 2222" value={formData.recruiterContactNumber} onChange={handleChange} className="input-field w-full h-11 px-3.5 rounded-xl text-sm font-medium text-text-primary placeholder:text-text-disabled" />
                   </div>
                   <div>
-                    <label className="block text-xs font-semibold text-neutral-700 dark:text-neutral-300 mb-1">Business Registration Number (BRN) *</label>
-                    <input type="text" name="businessRegNumber" required placeholder="PV-10492-SL" value={formData.businessRegNumber} onChange={handleChange} className="glass-input w-full h-11 px-3.5 rounded-xl text-sm font-medium text-neutral-900 dark:text-white placeholder:text-neutral-400" />
+                    <label className="block text-xs font-semibold text-text-secondary mb-1">Business Registration Number (BRN) *</label>
+                    <input type="text" name="businessRegNumber" required placeholder="PV-10492-SL" value={formData.businessRegNumber} onChange={handleChange} className="input-field w-full h-11 px-3.5 rounded-xl text-sm font-medium text-text-primary placeholder:text-text-disabled" />
                   </div>
                   <div>
-                    <label className="block text-xs font-semibold text-neutral-700 dark:text-neutral-300 mb-1">Tax Identification Number (TIN)</label>
-                    <input type="text" name="taxId" placeholder="TIN-98234123" value={formData.taxId} onChange={handleChange} className="glass-input w-full h-11 px-3.5 rounded-xl text-sm font-medium text-neutral-900 dark:text-white placeholder:text-neutral-400" />
+                    <label className="block text-xs font-semibold text-text-secondary mb-1">Tax Identification Number (TIN)</label>
+                    <input type="text" name="taxId" placeholder="TIN-98234123" value={formData.taxId} onChange={handleChange} className="input-field w-full h-11 px-3.5 rounded-xl text-sm font-medium text-text-primary placeholder:text-text-disabled" />
                   </div>
                   <div>
-                    <label className="block text-xs font-semibold text-neutral-700 dark:text-neutral-300 mb-1">Company Website</label>
-                    <input type="url" name="companyWebsite" placeholder="https://www.virtusa.com" value={formData.companyWebsite} onChange={handleChange} className="glass-input w-full h-11 px-3.5 rounded-xl text-sm font-medium text-neutral-900 dark:text-white placeholder:text-neutral-400" />
+                    <label className="block text-xs font-semibold text-text-secondary mb-1">Company Website</label>
+                    <input type="url" name="companyWebsite" placeholder="https://www.virtusa.com" value={formData.companyWebsite} onChange={handleChange} className="input-field w-full h-11 px-3.5 rounded-xl text-sm font-medium text-text-primary placeholder:text-text-disabled" />
                   </div>
                   <div>
-                    <label className="block text-xs font-semibold text-neutral-700 dark:text-neutral-300 mb-1">Recruiter LinkedIn Profile</label>
-                    <input type="url" name="recruiterLinkedin" placeholder="https://linkedin.com/in/..." value={formData.recruiterLinkedin} onChange={handleChange} className="glass-input w-full h-11 px-3.5 rounded-xl text-sm font-medium text-neutral-900 dark:text-white placeholder:text-neutral-400" />
+                    <label className="block text-xs font-semibold text-text-secondary mb-1">Recruiter LinkedIn Profile</label>
+                    <input type="url" name="recruiterLinkedin" placeholder="https://linkedin.com/in/..." value={formData.recruiterLinkedin} onChange={handleChange} className="input-field w-full h-11 px-3.5 rounded-xl text-sm font-medium text-text-primary placeholder:text-text-disabled" />
                   </div>
                   <div className="sm:col-span-2">
-                    <label className="block text-xs font-semibold text-neutral-700 dark:text-neutral-300 mb-1">Account Password *</label>
-                    <input type="password" name="password" required placeholder="••••••••" value={formData.password} onChange={handleChange} className="glass-input w-full h-11 px-3.5 rounded-xl text-sm font-medium text-neutral-900 dark:text-white placeholder:text-neutral-400" />
+                    <label className="block text-xs font-semibold text-text-secondary mb-1">Account Password *</label>
+                    <input type="password" name="password" required placeholder="••••••••" value={formData.password} onChange={handleChange} className="input-field w-full h-11 px-3.5 rounded-xl text-sm font-medium text-text-primary placeholder:text-text-disabled" />
                   </div>
                 </div>
               </div>
@@ -570,7 +570,7 @@ export default function Register() {
             <button
               type="submit"
               disabled={loading}
-              className="btn-liquid-primary w-full h-11 mt-4 rounded-xl text-sm font-semibold flex items-center justify-center gap-2 shadow-glass-sm"
+              className="btn-primary w-full h-11 mt-4 rounded-xl text-sm font-semibold flex items-center justify-center gap-2 shadow-sm"
             >
               {loading ? (
                 <div className="w-4 h-4 border-2 border-white/40 border-t-white rounded-full animate-spin" />
@@ -583,9 +583,9 @@ export default function Register() {
             </button>
           </form>
 
-          <div className="mt-6 text-center text-xs text-neutral-500 dark:text-neutral-400">
+          <div className="mt-6 text-center text-xs text-text-muted">
             Already registered?{' '}
-            <Link to="/login" className="font-semibold text-blue-600 dark:text-blue-400 hover:underline">
+            <Link to="/login" className="font-semibold text-primary hover:underline">
               Sign In
             </Link>
           </div>

@@ -66,12 +66,12 @@ export default function HeadDashboard() {
       <PageBackground variant="head" />
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-7 animate-applePageEnter">
         {/* Page Header */}
-        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-black/5 dark:border-white/10 pb-5">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-border-subtle pb-5">
           <div>
-            <h1 className="text-2xl sm:text-3xl font-bold text-neutral-900 dark:text-neutral-50 tracking-tight">
+            <h1 className="text-2xl sm:text-3xl font-bold text-text-primary tracking-tight">
               {user?.universityId?.name || 'Faculty Administration Portal'}
             </h1>
-            <p className="text-neutral-500 dark:text-neutral-400 text-xs sm:text-sm mt-1">
+            <p className="text-text-muted text-xs sm:text-sm mt-1">
               Faculty of Technology • Dean: {user?.name} ({user?.position || 'Dean'}) • {user?.email}
             </p>
           </div>
@@ -79,92 +79,103 @@ export default function HeadDashboard() {
 
         {/* Structured Metric Summary Strip */}
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-          <div className="glass-secondary glass-hover p-5 rounded-2xl">
-            <span className="text-xs font-medium text-neutral-500 dark:text-neutral-400 block">Pending Staff Join Requests</span>
-            <div className="text-3xl font-bold text-neutral-900 dark:text-neutral-50 mt-1.5 tabular-nums">{pendingRequests.length}</div>
+          <div className="card hover-card-effect p-5 rounded-2xl">
+            <span className="text-xs font-medium text-text-muted block">Pending Staff Join Requests</span>
+            <div className="text-3xl font-bold text-text-primary mt-1.5 tabular-nums">{pendingRequests.length}</div>
             <span className="inline-flex items-center gap-1 text-[11px] text-amber-600 dark:text-amber-400 font-semibold mt-1">
-              <span className="w-1.5 h-1.5 rounded-full bg-amber-500 animate-pulse"></span>
+              <span className="w-1.5 h-1.5 rounded-full bg-warning animate-pulse"></span>
               Awaiting authorization
             </span>
           </div>
 
-          <div className="glass-secondary glass-hover p-5 rounded-2xl">
-            <span className="text-xs font-medium text-neutral-500 dark:text-neutral-400 block">Authorized Supervisors</span>
-            <div className="text-3xl font-bold text-neutral-900 dark:text-neutral-50 mt-1.5 tabular-nums">{supervisors.length}</div>
-            <span className="text-[11px] text-neutral-500 dark:text-neutral-400 font-medium mt-1 inline-block">Active academic staff</span>
+          <div className="card hover-card-effect p-5 rounded-2xl">
+            <span className="text-xs font-medium text-text-muted block">Authorized Supervisors</span>
+            <div className="text-3xl font-bold text-text-primary mt-1.5 tabular-nums">{supervisors.length}</div>
+            <span className="text-[11px] text-text-muted font-medium mt-1 inline-block">Active academic staff</span>
           </div>
 
-          <div className="glass-secondary glass-hover p-5 rounded-2xl">
-            <span className="text-xs font-medium text-neutral-500 dark:text-neutral-400 block">Enrolled Undergraduates</span>
-            <div className="text-3xl font-bold text-neutral-900 dark:text-neutral-50 mt-1.5 tabular-nums">{students.length}</div>
-            <span className="text-[11px] text-neutral-500 dark:text-neutral-400 font-medium mt-1 inline-block">Faculty internship cohort</span>
+          <div className="card hover-card-effect p-5 rounded-2xl">
+            <span className="text-xs font-medium text-text-muted block">Enrolled Undergraduates</span>
+            <div className="text-3xl font-bold text-text-primary mt-1.5 tabular-nums">{students.length}</div>
+            <span className="text-[11px] text-text-muted font-medium mt-1 inline-block">Faculty internship cohort</span>
           </div>
         </div>
 
         {/* Main Container with Reference Glassmorphism */}
-        <div className="glass-form rounded-2xl shadow-glass-floating overflow-hidden">
-          <div className="border-b border-black/5 dark:border-white/10 px-6 py-3.5 flex gap-2 overflow-x-auto bg-black/[0.02] dark:bg-white/[0.02]">
-            <button
-              onClick={() => setActiveTab('requests')}
-              className={`btn-press px-4 py-2 rounded-full text-xs font-medium flex items-center gap-2 whitespace-nowrap transition-all duration-200 ${
-                activeTab === 'requests'
-                  ? 'glass-pill bg-white dark:bg-white/20 text-neutral-950 dark:text-white shadow-glass-sm font-semibold border-white/70 dark:border-white/20'
-                  : 'text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-white hover:bg-white/30 dark:hover:bg-white/5'
-              }`}
-            >
-              <UserCheck className="w-4 h-4" />
-              <span>Supervisor Join Requests</span>
-              <span className="px-2 py-0.5 rounded-full text-[10px] bg-black/5 dark:bg-white/10 text-neutral-700 dark:text-neutral-300 tabular-nums font-semibold">
-                {pendingRequests.length}
-              </span>
-            </button>
+        <div className="flex flex-col lg:flex-row gap-6">
+          {/* Navigation Sidebar */}
+          <div className="lg:w-64 shrink-0 flex flex-col gap-4">
+            <div className="flex flex-row lg:flex-col gap-1 overflow-x-auto card-elevated p-3 rounded-2xl shadow-card-elevated shadow-lg h-fit">
+              <button
+                onClick={() => setActiveTab('requests')}
+                className={`transition-transform active:scale-95 px-4 py-3 rounded-xl text-sm font-medium flex items-center justify-between gap-3 whitespace-nowrap lg:w-full transition-all duration-200 ${
+                  activeTab === 'requests'
+                    ? 'sidebar-nav-item active'
+                    : 'sidebar-nav-item'
+                }`}
+              >
+                <div className="flex items-center gap-3 min-w-0">
+                  <UserCheck className="w-4 h-4 shrink-0" />
+                  <span className="truncate">Supervisor Join Requests</span>
+                </div>
+                <span className="px-2 py-0.5 rounded-full text-[10px] bg-surface-hover text-text-secondary tabular-nums font-semibold shrink-0">
+                  {pendingRequests.length}
+                </span>
+              </button>
 
-            <button
-              onClick={() => setActiveTab('students')}
-              className={`btn-press px-4 py-2 rounded-full text-xs font-medium flex items-center gap-2 whitespace-nowrap transition-all duration-200 ${
-                activeTab === 'students'
-                  ? 'glass-pill bg-white dark:bg-white/20 text-neutral-950 dark:text-white shadow-glass-sm font-semibold border-white/70 dark:border-white/20'
-                  : 'text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-white hover:bg-white/30 dark:hover:bg-white/5'
-              }`}
-            >
-              <GraduationCap className="w-4 h-4" />
-              <span>Enrolled Students & Logs</span>
-              <span className="px-2 py-0.5 rounded-full text-[10px] bg-black/5 dark:bg-white/10 text-neutral-700 dark:text-neutral-300 tabular-nums font-semibold">
-                {students.length}
-              </span>
-            </button>
+              <button
+                onClick={() => setActiveTab('students')}
+                className={`transition-transform active:scale-95 px-4 py-3 rounded-xl text-sm font-medium flex items-center justify-between gap-3 whitespace-nowrap lg:w-full transition-all duration-200 ${
+                  activeTab === 'students'
+                    ? 'sidebar-nav-item active'
+                    : 'sidebar-nav-item'
+                }`}
+              >
+                <div className="flex items-center gap-3 min-w-0">
+                  <GraduationCap className="w-4 h-4 shrink-0" />
+                  <span className="truncate">Enrolled Students & Logs</span>
+                </div>
+                <span className="px-2 py-0.5 rounded-full text-[10px] bg-surface-hover text-text-secondary tabular-nums font-semibold shrink-0">
+                  {students.length}
+                </span>
+              </button>
 
-            <button
-              onClick={() => setActiveTab('supervisors')}
-              className={`btn-press px-4 py-2 rounded-full text-xs font-medium flex items-center gap-2 whitespace-nowrap transition-all duration-200 ${
-                activeTab === 'supervisors'
-                  ? 'glass-pill bg-white dark:bg-white/20 text-neutral-950 dark:text-white shadow-glass-sm font-semibold border-white/70 dark:border-white/20'
-                  : 'text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-white hover:bg-white/30 dark:hover:bg-white/5'
-              }`}
-            >
-              <Building2 className="w-4 h-4" />
-              <span>Faculty Staff Directory</span>
-              <span className="px-2 py-0.5 rounded-full text-[10px] bg-black/5 dark:bg-white/10 text-neutral-700 dark:text-neutral-300 tabular-nums font-semibold">
-                {supervisors.length}
-              </span>
-            </button>
+              <button
+                onClick={() => setActiveTab('supervisors')}
+                className={`transition-transform active:scale-95 px-4 py-3 rounded-xl text-sm font-medium flex items-center justify-between gap-3 whitespace-nowrap lg:w-full transition-all duration-200 ${
+                  activeTab === 'supervisors'
+                    ? 'sidebar-nav-item active'
+                    : 'sidebar-nav-item'
+                }`}
+              >
+                <div className="flex items-center gap-3 min-w-0">
+                  <Building2 className="w-4 h-4 shrink-0" />
+                  <span className="truncate">Faculty Staff Directory</span>
+                </div>
+                <span className="px-2 py-0.5 rounded-full text-[10px] bg-surface-hover text-text-secondary tabular-nums font-semibold shrink-0">
+                  {supervisors.length}
+                </span>
+              </button>
+            </div>
           </div>
 
-        {/* Tab 1: Requests */}
+          {/* Content Area */}
+          <div className="flex-1 card-elevated p-6 rounded-2xl shadow-card-elevated shadow-lg overflow-hidden min-h-[500px]">
+          {/* Tab 1: Requests */}
         {activeTab === 'requests' && (
           <div className="p-6">
             {requests.length === 0 ? (
-              <div className="py-14 text-center text-neutral-500 dark:text-neutral-400">
-                <div className="w-12 h-12 rounded-2xl glass-secondary flex items-center justify-center mx-auto mb-3 text-neutral-400">
+              <div className="py-14 text-center text-text-muted">
+                <div className="w-12 h-12 rounded-2xl card flex items-center justify-center mx-auto mb-3 text-text-disabled">
                   <UserCheck className="w-6 h-6" />
                 </div>
-                <p className="font-semibold text-neutral-800 dark:text-neutral-200 text-sm">No Pending Staff Requests</p>
-                <p className="text-xs text-neutral-500 dark:text-neutral-400 mt-1">Faculty staff join requests will appear here for verification.</p>
+                <p className="font-semibold text-text-primary text-sm">No Pending Staff Requests</p>
+                <p className="text-xs text-text-muted mt-1">Faculty staff join requests will appear here for verification.</p>
               </div>
             ) : (
-              <div className="overflow-x-auto rounded-2xl border border-black/5 dark:border-white/10">
+              <div className="overflow-x-auto rounded-2xl border border-border-subtle">
                 <table className="w-full text-left text-xs">
-                  <thead className="text-[11px] font-semibold uppercase tracking-wider bg-black/[0.02] dark:bg-white/[0.02] text-neutral-500 dark:text-neutral-400 border-b border-black/5 dark:border-white/10">
+                  <thead className="text-[11px] font-semibold uppercase tracking-wider bg-black/[0.02] dark:bg-white/[0.02] text-text-muted border-b border-border-subtle">
                     <tr>
                       <th className="py-3.5 px-4 font-semibold">Supervisor Name</th>
                       <th className="py-3.5 px-4 font-semibold">Staff Registration No</th>
@@ -177,46 +188,46 @@ export default function HeadDashboard() {
                   <tbody className="divide-y divide-black/5 dark:divide-white/5">
                     {requests.map((req) => (
                       <tr key={req._id} className="hover:bg-white/50 dark:hover:bg-white/[0.03] transition-colors">
-                        <td className="py-4 px-4 font-semibold text-neutral-900 dark:text-neutral-100">
+                        <td className="py-4 px-4 font-semibold text-text-primary dark:text-neutral-100">
                           {req.supervisorId?.name || 'Staff Member'}
                         </td>
-                        <td className="py-4 px-4 font-mono font-medium text-neutral-700 dark:text-neutral-300">
-                          <span className="glass-pill px-2 py-0.5 text-[11px]">
+                        <td className="py-4 px-4 font-mono font-medium text-text-secondary">
+                          <span className="bg-secondary text-text-secondary border border-border-subtle rounded-full px-2 py-0.5 text-[11px]">
                             {req.staffRegNo}
                           </span>
                         </td>
-                        <td className="py-4 px-4 text-neutral-600 dark:text-neutral-300 font-medium">
+                        <td className="py-4 px-4 text-text-secondary font-medium">
                           {req.position || req.supervisorId?.position || 'Lecturer'}
                         </td>
-                        <td className="py-4 px-4 text-neutral-600 dark:text-neutral-300">
-                          <div className="font-medium text-neutral-900 dark:text-white">{req.supervisorId?.email}</div>
+                        <td className="py-4 px-4 text-text-secondary">
+                          <div className="font-medium text-text-primary">{req.supervisorId?.email}</div>
                           {req.supervisorId?.personalEmail && (
-                            <div className="text-[11px] text-neutral-500 dark:text-neutral-400">{req.supervisorId?.personalEmail}</div>
+                            <div className="text-[11px] text-text-muted">{req.supervisorId?.personalEmail}</div>
                           )}
                         </td>
                         <td className="py-4 px-4">
                           <StatusBadge status={req.status} size="sm" />
                         </td>
-                        <td className="py-4 px-4 text-right space-x-2">
+                        <td className="py-4 px-4 flex flex-wrap items-center justify-end gap-2">
                           {req.status === 'pending' ? (
                             <>
                               <button
                                 onClick={() => handleReviewRequest(req._id, 'approved')}
                                 disabled={actionLoading[req._id]}
-                                className="btn-liquid-primary inline-flex items-center gap-1.5 text-xs font-semibold px-3.5 py-1.5 rounded-xl shadow-glass-sm"
+                                className="btn-primary inline-flex items-center gap-1.5 text-xs font-semibold px-3.5 py-1.5 rounded-xl shadow-sm"
                               >
                                 <Check className="w-3.5 h-3.5" /> Authorize
                               </button>
                               <button
                                 onClick={() => handleReviewRequest(req._id, 'rejected')}
                                 disabled={actionLoading[req._id]}
-                                className="glass-hover inline-flex items-center gap-1.5 text-xs font-medium bg-rose-500/10 hover:bg-rose-500/20 text-rose-700 dark:text-rose-400 border border-rose-500/30 px-3.5 py-1.5 rounded-xl transition"
+                                className="btn-danger inline-flex items-center gap-1.5 text-xs font-semibold px-3.5 py-1.5 rounded-xl shadow-sm"
                               >
                                 <X className="w-3.5 h-3.5" /> Decline
                               </button>
                             </>
                           ) : (
-                            <span className="text-xs text-neutral-400 dark:text-neutral-500">Processed</span>
+                            <span className="text-xs text-text-disabled">Processed</span>
                           )}
                         </td>
                       </tr>
@@ -232,17 +243,17 @@ export default function HeadDashboard() {
         {activeTab === 'students' && (
           <div className="p-6">
             {students.length === 0 ? (
-              <div className="py-14 text-center text-neutral-500 dark:text-neutral-400">
-                <div className="w-12 h-12 rounded-2xl glass-secondary flex items-center justify-center mx-auto mb-3 text-neutral-400">
+              <div className="py-14 text-center text-text-muted">
+                <div className="w-12 h-12 rounded-2xl card flex items-center justify-center mx-auto mb-3 text-text-disabled">
                   <GraduationCap className="w-6 h-6" />
                 </div>
-                <p className="font-semibold text-neutral-800 dark:text-neutral-200 text-sm">No Students Enrolled Yet</p>
-                <p className="text-xs text-neutral-500 dark:text-neutral-400 mt-1">Students enrolled under your faculty will appear here.</p>
+                <p className="font-semibold text-text-primary text-sm">No Students Enrolled Yet</p>
+                <p className="text-xs text-text-muted mt-1">Students enrolled under your faculty will appear here.</p>
               </div>
             ) : (
-              <div className="overflow-x-auto rounded-2xl border border-black/5 dark:border-white/10">
+              <div className="overflow-x-auto rounded-2xl border border-border-subtle">
                 <table className="w-full text-left text-xs">
-                  <thead className="text-[11px] font-semibold uppercase tracking-wider bg-black/[0.02] dark:bg-white/[0.02] text-neutral-500 dark:text-neutral-400 border-b border-black/5 dark:border-white/10">
+                  <thead className="text-[11px] font-semibold uppercase tracking-wider bg-black/[0.02] dark:bg-white/[0.02] text-text-muted border-b border-border-subtle">
                     <tr>
                       <th className="py-3.5 px-4 font-semibold">Student</th>
                       <th className="py-3.5 px-4 font-semibold">Reg No</th>
@@ -256,33 +267,33 @@ export default function HeadDashboard() {
                     {students.map((st) => (
                       <tr key={st._id} className="hover:bg-white/50 dark:hover:bg-white/[0.03] transition-colors">
                         <td className="py-4 px-4">
-                          <div className="font-semibold text-neutral-900 dark:text-white">{st.name}</div>
-                          <div className="text-[11px] text-neutral-500 dark:text-neutral-400">{st.email}</div>
+                          <div className="font-semibold text-text-primary">{st.name}</div>
+                          <div className="text-[11px] text-text-muted">{st.email}</div>
                         </td>
-                        <td className="py-4 px-4 font-mono font-medium text-neutral-700 dark:text-neutral-300 tabular-nums">
-                          <span className="glass-pill px-2 py-0.5 text-[11px]">
+                        <td className="py-4 px-4 font-mono font-medium text-text-secondary tabular-nums">
+                          <span className="bg-secondary text-text-secondary border border-border-subtle rounded-full px-2 py-0.5 text-[11px]">
                             {st.profile?.studentRegNo || 'N/A'}
                           </span>
                         </td>
                         <td className="py-4 px-4">
-                          <div className="font-medium text-neutral-800 dark:text-neutral-200">{st.profile?.degreeProgram || 'BICT'}</div>
-                          <span className="glass-pill inline-block mt-1 text-[10px] font-semibold text-neutral-600 dark:text-neutral-300 px-2 py-0.5">
+                          <div className="font-medium text-text-primary">{st.profile?.degreeProgram || 'BICT'}</div>
+                          <span className="bg-secondary text-text-secondary border border-border-subtle rounded-full inline-block mt-1 text-[10px] font-semibold text-text-secondary px-2 py-0.5">
                             {st.profile?.mainCategory || 'IT'}
                           </span>
                         </td>
-                        <td className="py-4 px-4 text-neutral-600 dark:text-neutral-300 font-medium">
+                        <td className="py-4 px-4 text-text-secondary font-medium">
                           {st.profile?.desiredField || 'General'}
                         </td>
-                        <td className="py-4 px-4 text-neutral-600 dark:text-neutral-300">
+                        <td className="py-4 px-4 text-text-secondary">
                           <div>{st.livingCity || st.profile?.livingCity || '—'}</div>
-                          {st.profile?.gpa && <div className="text-neutral-800 dark:text-neutral-200 font-semibold tabular-nums text-[11px] mt-0.5">GPA: {st.profile.gpa}</div>}
+                          {st.profile?.gpa && <div className="text-text-primary font-semibold tabular-nums text-[11px] mt-0.5">GPA: {st.profile.gpa}</div>}
                         </td>
                         <td className="py-4 px-4 text-right">
                           <button
                             onClick={() => setSelectedStudentId(st._id)}
-                            className="btn-liquid inline-flex items-center gap-1.5 text-xs font-semibold px-3.5 py-1.5 rounded-xl shadow-glass-sm"
+                            className="transition-transform active:scale-95 inline-flex items-center gap-1.5 text-xs font-semibold px-3.5 py-1.5 rounded-xl shadow-sm"
                           >
-                            <FileText className="w-3.5 h-3.5 text-neutral-500 dark:text-neutral-400" /> Inspect Log
+                            <FileText className="w-3.5 h-3.5 text-text-muted" /> Inspect Log
                           </button>
                         </td>
                       </tr>
@@ -297,9 +308,9 @@ export default function HeadDashboard() {
         {/* Tab 3: Supervisors */}
         {activeTab === 'supervisors' && (
           <div className="p-6">
-            <div className="overflow-x-auto rounded-2xl border border-black/5 dark:border-white/10">
+            <div className="overflow-x-auto rounded-2xl border border-border-subtle">
               <table className="w-full text-left text-xs">
-                <thead className="text-[11px] font-semibold uppercase tracking-wider bg-black/[0.02] dark:bg-white/[0.02] text-neutral-500 dark:text-neutral-400 border-b border-black/5 dark:border-white/10">
+                <thead className="text-[11px] font-semibold uppercase tracking-wider bg-black/[0.02] dark:bg-white/[0.02] text-text-muted border-b border-border-subtle">
                   <tr>
                     <th className="py-3.5 px-4 font-semibold">Staff Member</th>
                     <th className="py-3.5 px-4 font-semibold">Staff Reg No</th>
@@ -312,15 +323,15 @@ export default function HeadDashboard() {
                 <tbody className="divide-y divide-black/5 dark:divide-white/5">
                   {supervisors.map((sup) => (
                     <tr key={sup._id} className="hover:bg-white/50 dark:hover:bg-white/[0.03] transition-colors">
-                      <td className="py-4 px-4 font-semibold text-neutral-900 dark:text-white">{sup.name}</td>
-                      <td className="py-4 px-4 font-mono font-medium text-neutral-700 dark:text-neutral-300">
-                        <span className="glass-pill px-2 py-0.5 text-[11px]">
+                      <td className="py-4 px-4 font-semibold text-text-primary">{sup.name}</td>
+                      <td className="py-4 px-4 font-mono font-medium text-text-secondary">
+                        <span className="bg-secondary text-text-secondary border border-border-subtle rounded-full px-2 py-0.5 text-[11px]">
                           {sup.staffRegNo || 'STAFF-ID'}
                         </span>
                       </td>
-                      <td className="py-4 px-4 text-neutral-600 dark:text-neutral-300">{sup.position || 'Academic Staff'}</td>
-                      <td className="py-4 px-4 text-neutral-600 dark:text-neutral-300">{sup.email}</td>
-                      <td className="py-4 px-4 text-neutral-600 dark:text-neutral-300">{sup.phone || 'N/A'}</td>
+                      <td className="py-4 px-4 text-text-secondary">{sup.position || 'Academic Staff'}</td>
+                      <td className="py-4 px-4 text-text-secondary">{sup.email}</td>
+                      <td className="py-4 px-4 text-text-secondary">{sup.phone || 'N/A'}</td>
                       <td className="py-4 px-4">
                         <StatusBadge status={sup.status} size="sm" />
                       </td>
@@ -331,7 +342,8 @@ export default function HeadDashboard() {
             </div>
           </div>
         )}
-      </div>
+          </div>
+        </div>
 
       {/* Progress Log Inspector Modal */}
       {selectedStudentId && (

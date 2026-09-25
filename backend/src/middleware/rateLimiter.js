@@ -69,9 +69,22 @@ const aiLimiter = rateLimit({
   handler: rateLimitHandler('AI usage rate limit reached. Please try again in a few minutes.', 'AI_RATE_LIMIT_EXCEEDED'),
 });
 
+/**
+ * File upload rate limiter (Max 30 uploads / 15 minutes per IP)
+ */
+const uploadLimiter = rateLimit({
+  windowMs: 15 * 60 * 1000,
+  max: 30,
+  standardHeaders: true,
+  legacyHeaders: false,
+  message: 'Too many upload requests from this IP. Please try again later.',
+  handler: rateLimitHandler('Too many upload requests. Please try again later.', 'UPLOAD_RATE_LIMIT_EXCEEDED'),
+});
+
 module.exports = {
   generalLimiter,
   authLimiter,
   passwordResetLimiter,
   aiLimiter,
+  uploadLimiter,
 };

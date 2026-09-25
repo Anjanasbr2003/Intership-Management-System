@@ -143,7 +143,7 @@ app.use('/api/ai', require('./routes/aiRoutes'));
 app.get('/api/health', (req, res) => {
   res.json({
     status: 'online',
-    system: 'Interlink Internship Management Portal API',
+    system: 'Internship Management System API',
     securityHardened: true,
     timestamp: new Date().toISOString(),
   });
@@ -175,7 +175,7 @@ app.use((err, req, res, next) => {
 
 const PORT = process.env.PORT || 5000;
 const server = app.listen(PORT, '0.0.0.0', () => {
-  console.log(`🔒 Interlink backend server running in hardened security mode on port ${PORT}`);
+  console.log(`🔒 Internship Management System backend server running in hardened security mode on port ${PORT}`);
 });
 
 // Avoid ECONNRESET with proxy keep-alive connections

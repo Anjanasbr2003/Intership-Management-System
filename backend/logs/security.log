@@ -54,3 +54,12 @@
 {"timestamp":"2026-09-20T12:38:19.530Z","type":"FAILED_LOGIN_ATTEMPT","severity":"WARN","ip":"127.0.0.1","userId":null,"email":"student@gmail.comasd","details":"Invalid credentials provided for login.","metadata":{}}
 {"timestamp":"2026-09-24T14:31:12.053Z","type":"SUCCESSFUL_LOGIN","severity":"INFO","ip":"127.0.0.1","userId":13,"email":"student@gmail.com","details":"User logged in successfully (Role: student)","metadata":{}}
 {"timestamp":"2026-09-24T14:31:45.576Z","type":"SUCCESSFUL_LOGIN","severity":"INFO","ip":"127.0.0.1","userId":1,"email":"admin@interlink.lk","details":"User logged in successfully (Role: admin)","metadata":{}}
+{"timestamp":"2026-09-25T05:57:43.255Z","type":"SUCCESSFUL_LOGIN","severity":"INFO","ip":"127.0.0.1","userId":13,"email":"student@gmail.com","details":"User logged in successfully (Role: student)","metadata":{}}
+{"timestamp":"2026-09-25T06:14:23.344Z","type":"SUCCESSFUL_LOGIN","severity":"INFO","ip":"127.0.0.1","userId":13,"email":"student@gmail.com","details":"User logged in successfully (Role: student)","metadata":{}}
+{"timestamp":"2026-09-25T06:27:41.380Z","type":"SUCCESSFUL_LOGIN","severity":"INFO","ip":"127.0.0.1","userId":13,"email":"student@gmail.com","details":"User logged in successfully (Role: student)","metadata":{}}
+{"timestamp":"2026-09-25T06:28:30.273Z","type":"SUCCESSFUL_LOGIN","severity":"INFO","ip":"127.0.0.1","userId":1,"email":"admin@interlink.lk","details":"User logged in successfully (Role: admin)","metadata":{}}
+{"timestamp":"2026-09-25T06:57:11.895Z","type":"SUCCESSFUL_LOGIN","severity":"INFO","ip":"127.0.0.1","userId":13,"email":"student@gmail.com","details":"User logged in successfully (Role: student)","metadata":{}}
+{"timestamp":"2026-09-25T07:45:19.458Z","type":"SUCCESSFUL_LOGIN","severity":"INFO","ip":"127.0.0.1","userId":13,"email":"student@gmail.com","details":"User logged in successfully (Role: student)","metadata":{}}
+{"timestamp":"2026-09-25T07:45:21.641Z","type":"SUCCESSFUL_LOGIN","severity":"INFO","ip":"127.0.0.1","userId":13,"email":"student@gmail.com","details":"User logged in successfully (Role: student)","metadata":{}}
+{"timestamp":"2026-09-25T08:50:56.681Z","type":"SUCCESSFUL_LOGIN","severity":"INFO","ip":"127.0.0.1","userId":9,"email":"kasun.w@virtusa.com","details":"User logged in successfully (Role: employer)","metadata":{}}
+{"timestamp":"2026-09-25T08:58:29.484Z","type":"SUCCESSFUL_LOGIN","severity":"INFO","ip":"127.0.0.1","userId":13,"email":"student@gmail.com","details":"User logged in successfully (Role: student)","metadata":{}}

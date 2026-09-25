@@ -1,56 +1,54 @@
 # Interlink — University Internship Management Portal
 
 ## 🚀 System Overview & Architecture
-**Interlink** is a centralized, role-based internship management web platform built on **MySQL, Express.js, React, and Node.js** (utilizing **Sequelize ORM**), designed to connect universities, academic supervisors, students, and industry employers.
+**Interlink** is an enterprise-grade, role-based internship management web platform built on **MySQL, Express.js, React, and Node.js** (utilizing **Sequelize ORM**). It seamlessly bridges higher education institutions, academic faculty supervisors, undergraduate students, and industry employers into a unified digital workspace.
 
-The platform provides complete role-based access control (RBAC) and tailored workflows across five stakeholder roles:
-1. **Admin**: System oversight, approval/rejection of university and employer registrations, read-only access to all profiles.
-2. **University Head (Dean/HOD)**: Approves faculty supervisor join requests, monitors enrolled students of the university and inspects their daily progress logs in real-time.
-3. **Supervisor**: Monitors interns enrolled under their university department and reviews daily work logs and hours.
-4. **Student**: Self-registration with immediate activation, profile management, CV upload, daily progress logging (date, hours, tasks, learnings), job board browsing, and application tracking.
-5. **Employer / Recruiter**: Self-registration with admin verification, job posting, applicant management grouped by vacancy, and an automated category-matching engine that suggests suitable student candidates.
+The platform enforces strict role-based access control (RBAC) and tailored workflows across five distinct stakeholder roles:
+1. **Admin**: Platform oversight, review and approval/rejection of university and employer registrations, user management, and read-only administrative auditing.
+2. **University Head (Dean / HOD)**: Approves faculty supervisor join requests, manages academic rosters, and inspects enrolled students' daily progress logs in real time.
+3. **Supervisor**: Monitors interns enrolled under their university faculty, tracks attendance/hours, and reviews daily work logs.
+4. **Student**: Self-registration with immediate activation, comprehensive profile & CV management, interactive daily progress logging (hours, tasks, learnings), job board browsing, and real-time application tracking.
+5. **Employer / Recruiter**: Self-registration with admin verification, internship vacancy publication, applicant review pipeline divided by job, and automated category matching.
 
 ---
 
-## ✨ Recent Major Enhancements & Updates
+## ✨ Major System Enhancements & Architecture Updates
 
-### 1. 🎨 Apple-Grade Liquid Glassmorphism (`.glass-form`)
-* **Frosted Translucent Form Architecture**: Engineered liquid glassmorphic styling across all form containers (`.glass-form`, `.glass-primary`, `.glass-secondary`, `.glass-floating`, `.glass-input`).
-* **Optical Diffusion & Depth**: High blur diffusion (`backdrop-filter: blur(28px) saturate(190%)`), luminous specular rims (`1px solid rgba(255, 255, 255, 0.85)` / `0.14`), and layered inset bevels (`box-shadow: inset 0 1.5px 1.5px 0 rgba(255, 255, 255, 0.95), inset 0 -1px 2px 0 rgba(255, 255, 255, 0.35)`).
-* **Vibrant Backing Accents**: Added luminous refractive backing elements on Login and Register forms to create dynamic color refraction through the frosted glass.
-* **Scroll-Blended Translucency**: Forms dynamically blend with background wallpapers, circuit motifs, and ambient color blooms as users scroll.
-* **Universal Application**: Implemented across Login, Register (all 4 roles), Student Profile & CV Form, Daily Progress Log Modal, Job Vacancy Post Modal, Supervisor Access Request Card, and Student Progress Modal.
+### 1. 🎨 Professional Enterprise UI Design & Responsive Sidebar Architecture
+* **Two-Column Dashboard Layout**: Replaced cramped horizontal tab bars with modern, responsive two-column layouts featuring sticky navigation sidebars across all primary dashboards (**Student**, **Employer**, **Admin**, and **Head**).
+* **Responsive Mobile Adaptation**: Sidebars smoothly fold into horizontal touch-scrollable bars on smaller devices while providing full vertical column navigation on desktops.
+* **Streamlined Metric Cards**: Standardized top-level KPI overview cards with tabular numeral styling (`tabular-nums`) to prevent layout shifts.
 
-### 2. ☀️ Day Mode Contrast & Color Calibration
-* **Cool Slate Base Canvas**: Replaced chalky, washed-out flat white with a soothing, dimensional slate-gray canvas (`#eef2f7`).
-* **Recalibrated Scrims**: Replaced heavy 75–90% opaque white scrims with a calibrated translucent overlay (`bg-slate-200/30 backdrop-blur-[2px]`) and soft directional vignette (`from-[#eef2f7]/40 via-transparent to-[#e2e8f0]/70`), allowing wallpapers and ambient graphics to remain visible.
-* **Atmospheric Color Blooms**: Boosted Day Mode ambient color orbs to 25–28% opacity, adding depth and visual warmth.
-* **Night Mode Preserved**: All dark obsidian glass styling, deep contrast, and neon accents remain completely intact.
+### 2. 🌓 Comprehensive Semantic Color System (Light & Dark Mode)
+* **Unified CSS Token Architecture**: Replaced hardcoded Tailwind utility colors with semantic CSS custom properties (`--background`, `--surface`, `--surface-elevated`, `--primary`, `--text-primary`, `--border`, etc.) exposed through `tailwind.config.js`.
+* **Zero Pure-Black Policy**: Dark Mode utilizes elevated dark grays (`#111315` canvas, `#181B1F` surfaces, `#20242A` elevated cards) with reduced color saturation to prevent ocular fatigue.
+* **Soft Light Mode Canvas**: Light Mode operates on a soothing `#F8F9FA` background with clean `#FFFFFF` surface cards, eliminating harsh glaring white.
+* **Consistent Status Indicators**: Semantic status tokens (`badge-success`, `badge-warning`, `badge-error`, `badge-info`) across all data tables and alert banners.
 
-### 3. 🖼️ Direct Profile Image File Upload System
-* **No External Image Links**: Replaced external image URL text inputs with direct image file upload pickers (`<input type="file">`).
-* **Registration Image Uploader**: Added an optional profile picture uploader with instant local avatar preview and background upload to `/api/auth/upload-image`.
-* **Profile Photo Studio (Student Dashboard)**: Interactive photo studio in Tab 4 ("Profile & CV") with squircle avatar preview, "Change Photo", and "Remove Photo" actions.
-* **Real-Time Avatar Sync**: Uploading or changing a photo immediately updates the studio preview, the dashboard top profile header badge, and the global Navbar avatar via `refreshUser()`.
-* **Backend Upload Security Engine**: Multer configuration storing to `uploads/profiles/` with strict MIME/extension filtering (`.jpg, .jpeg, .png, .webp, .gif`), 5MB size limit, and cryptographically random filenames (`profile-${hex}${ext}`).
-* **Endpoints**: Added `POST /api/auth/upload-image` (public for registration), `POST /api/auth/profile-picture` (authenticated), and `POST /api/students/profile-picture`.
-* **Database**: Added `profilePic: DataTypes.STRING(500)` to the `User` model.
+### 3. 📖 High-Contrast Light Mode Typography & Font Hierarchy
+* **Accessible Contrast Ratios**: Full compliance with WCAG AAA / AA standards across all light surfaces:
+  * **Primary Headings & Content (`--text-primary`)**: Deep Carbon (`#111827`) achieving a **17.5:1** contrast ratio.
+  * **Secondary Labels & Details (`--text-secondary`)**: Graphite Charcoal (`#374151`) with **9.4:1** contrast.
+  * **Supporting & Muted Metadata (`--text-muted`)**: Steel Slate (`#4B5563`) with **7.2:1** contrast.
+  * **Input Placeholders (`--text-disabled`)**: Crisp Slate (`#6B7280`) ensuring form hints remain readable under bright lighting.
+* **Refined Sidebar Navigation States**: Active sidebar links render with a soft primary tint (`rgba(29, 78, 216, 0.08)`), subtle sapphire blue border, and bold primary text (`#1D4ED8`), while inactive items maintain clean contrast with smooth hover feedback.
 
-### 4. 🔐 Multi-Identifier Login & Password Sanitization Fix
-* **Flexible Multi-Identifier Login**: Users can now log in using **any** of the following identifiers:
-  - **Institutional Email** (e.g., `student@gmail.com`, `tharinda.g@fot.ruh.ac.lk`)
-  - **Personal Email** (e.g., `anjanasbr2003@gmail.com`)
-  - **Student Registration Number** (e.g., `TG/2023/1704`)
-  - **Academic Staff Registration Number** (e.g., `STAFF/RUH/FOT/042`)
-* **Candidate Password Resolution**: Resolves all accounts matching any of the user's identifiers, checks passwords against active accounts, and logs in seamlessly without confusion between personal and university emails.
-* **Password Sanitization Bypass**: Added `SENSITIVE_KEYS` check in `sanitize.js` (`password`, `newPassword`, `currentPassword`, `confirmPassword`) to exempt passwords from XSS HTML entity encoding, preventing hash corruption.
-* **Password Reset Flexibility**: `/api/auth/forgot-password` supports looking up accounts by either institutional or personal email.
-* **Login Form UX**: Changed input type to `type="text"` with `autoComplete="username"` to support non-email registration numbers without HTML5 regex blocking.
+### 4. 🖼️ Calibrated Dual-Mode Atmospheric Backgrounds
+* **Day Mode Contrast Preservation**: High-resolution workflow wallpapers and video backgrounds in Light Mode are treated with an automated light scrim (`--background/85`), soft desaturation, and backdrop frosting (`backdrop-blur-md`), presenting them as elegant watermarks without obstructing dark text.
+* **Night Mode Richness**: Full obsidian glass styling, deep contrast, and luminous background depth remain preserved in Dark Mode.
+* **Architectural Grid Texture**: Underlying precision SVG grid pattern enhances modern enterprise aesthetic across both themes.
 
-### 5. 🏷️ Official Site Logo Update
-* **New Emblem**: Replaced previous generic SVG vector with the official circular partnership emblem (two hands reaching together within circular blue and teal arcs).
-* **Apple Squircle Badge**: Rendered inside an Apple-style frosted squircle container (`rounded-2xl bg-white shadow-glass-sm border border-slate-200/90 dark:border-white/20`) for optimal contrast in both Day and Night modes.
-* **Universal Deployment**: Integrated into the Navbar, Login hero header, Register hero header, and browser tab favicon (`<link rel="icon" type="image/jpeg" href="/logo.jpg" />`).
+### 5. ⚡ Spacing, Layout Stability & Global Smooth Scrolling
+* **Action Decision Button Wrapping**: Replaced rigid horizontal margins with modern flexbox wrapping (`flex flex-wrap items-center justify-end gap-2`), preventing vertical collisions on dense data tables.
+* **Global Smooth Scrolling**: Added `scroll-smooth` to the root HTML document for fluid transitions when navigating hash links or scrolling long tables.
+
+### 6. 🔒 Backend Security Hardening & Robustness
+* **Privilege Escalation Defense**: Implemented strict role whitelisting on public registration (`POST /api/auth/register`), completely blocking unauthorized self-registration as platform `admin`.
+* **Broken Object-Level Authorization (BOLA) Remediation**: Enforced `requireApproved` guards across student log inspection (`GET /api/students/:id/logs`), employer applicant feeds (`GET /api/employer/applicants`), and candidate suggestions (`GET /api/employer/suggested-students`), preventing unvetted accounts from harvesting student data.
+* **Student PII Redaction**: Protected student personal phone numbers and private personal emails from unconsented discovery feeds, exposing them only when a student actively applies to an employer vacancy.
+* **Database Null-Safety & Fallbacks**: Resolved potential `notNull` Sequelize crashes on daily progress log creation by implementing fallback resolution for student `universityId`.
+* **Atomic Database Transactions**: Wrapped multi-table state updates in `sequelize.transaction()` across university approvals and supervisor join requests.
+* **Upload Rate Limiting**: Added a dedicated `uploadLimiter` for avatars and documents (30 requests / 15 minutes) to prevent avatar previews from consuming authentication attempt quotas.
 
 ---
 
@@ -58,19 +56,20 @@ The platform provides complete role-based access control (RBAC) and tailored wor
 
 | Role | Email / Identifier | Password | Status | Notes |
 | :--- | :--- | :--- | :--- | :--- |
-| **Admin** | `admin@interlink.lk` | `admin123` | Active | System owner, approves universities & employers |
+| **Admin** | `admin@interlink.lk` | `admin123` | Active | Platform administrator; oversees universities & employers |
 | **University Head** | `head@ruhuna.ac.lk` | `head123` | Approved | Dean, Faculty of Technology, University of Ruhuna |
-| **University Head** | `head@mrt.ac.lk` | `head123` | Pending | University of Moratuwa (Admin test demo) |
+| **University Head** | `head@mrt.ac.lk` | `head123` | Pending | University of Moratuwa (Admin approval demo) |
 | **Supervisor** | `kasun.w@fot.ruh.ac.lk`<br>or `STAFF/RUH/FOT/042` | `sup123` | Approved | Senior Lecturer, University of Ruhuna |
-| **Supervisor** | `nuwan.p@fot.ruh.ac.lk`<br>or `STAFF/RUH/FOT/089` | `sup123` | Pending | Lecturer (Probationary), Pending Head approval |
-| **Student** | `tharinda.g@fot.ruh.ac.lk`<br>or `TG/2023/1704` | `student123` | Active | BICT, Software Engineering (Has 3 daily logs) |
+| **Supervisor** | `nuwan.p@fot.ruh.ac.lk`<br>or `STAFF/RUH/FOT/089` | `sup123` | Pending | Lecturer (Probationary); Pending Head approval |
+| **Student** | `tharinda.g@fot.ruh.ac.lk`<br>or `TG/2023/1704` | `student123` | Active | BICT, Software Engineering (Has daily logs) |
 | **Student** | `daham.s@fot.ruh.ac.lk`<br>or `TG/2023/1713` | `student123` | Active | BICT, Backend & Cloud Infrastructure |
 | **Student** | `sandun.b@fot.ruh.ac.lk`<br>or `TG/2023/1741` | `student123` | Active | BICT, Data Analysis & Bioinformatics |
 | **Employer** | `kasun.w@virtusa.com` | `employer123` | Approved | Virtusa Sri Lanka (IT Sector, 2 open vacancies) |
 | **Employer** | `nilmini@hayleysbio.lk` | `employer123` | Approved | Hayleys Agriculture & Biotechnology (1 vacancy) |
 | **Employer** | `malik@wso2.com` | `employer123` | Pending | WSO2 Sri Lanka (Pending Admin review demo) |
 
-*(Note: You can log in using either your institutional email, personal email, or registration number!)*
+> [!NOTE]
+> Authentication supports multi-identifier resolution: you can sign in using an **Institutional Email**, **Personal Email**, **Student Registration Number**, or **Staff Registration Number**!
 
 ---
 
@@ -78,21 +77,23 @@ The platform provides complete role-based access control (RBAC) and tailored wor
 ```
 interlink/
 ├── backend/
-│   ├── logs/                # Audit & security event logs
+│   ├── logs/                # Audit & security event logs (security.log)
 │   ├── src/
-│   │   ├── config/          # MySQL Sequelize connection & database initialization
+│   │   ├── config/          # MySQL Sequelize connection (db.js) & pricing catalog
 │   │   ├── controllers/     # Auth, Admin, University, Supervisor, Student, Job, Employer
 │   │   ├── middleware/      # JWT Protect, RBAC Guard, Rate Limiter, CSRF, Sanitize, Upload
 │   │   ├── models/          # User, University, JoinRequest, StudentProfile, DailyProgressLog, JobPosting, Application
 │   │   ├── routes/          # Express API route declarations
 │   │   ├── seed/            # Seeder script populating realistic universities, students, jobs, logs in MySQL
-│   │   ├── utils/           # Security logger & utilities
+│   │   ├── utils/           # Security logger & cookie utilities
 │   │   └── server.js        # Hardened Express server entry point
 │   ├── uploads/
 │   │   ├── cvs/             # Uploaded student CV PDF storage
 │   │   └── profiles/        # Uploaded profile photos storage
 │   ├── .env                 # Database credentials and JWT secrets
 │   └── package.json
+├── database/
+│   └── interlink_db.sql     # Full MySQL relational database schema & dump
 ├── frontend/
 │   ├── public/
 │   │   ├── backgrounds/     # High-definition video & photography wallpapers
@@ -100,21 +101,21 @@ interlink/
 │   ├── src/
 │   │   ├── api/             # Axios client with JWT interceptor & CSRF handling
 │   │   ├── assets/          # Static assets and logo
-│   │   ├── components/      # InterlinkLogo, Navbar, PageBackground, Toast, Modals
+│   │   ├── components/      # InterlinkLogo, Navbar, PageBackground, StatusBadge, Toast, Modals
 │   │   ├── context/         # AuthContext & ThemeContext
 │   │   ├── pages/
-│   │   │   ├── admin/       # Admin Dashboard
+│   │   │   ├── admin/       # Admin Dashboard with Sidebar
 │   │   │   ├── auth/        # Login & Multi-Role Register
 │   │   │   ├── employer/    # Employer Dashboard & Job Postings
 │   │   │   ├── head/        # University Head Dashboard
 │   │   │   ├── student/     # Student Portal & Progress Logger
 │   │   │   └── supervisor/  # Supervisor Dashboard
 │   │   ├── App.jsx          # Route guards & paths
-│   │   ├── index.css        # Apple liquid glassmorphism utility classes
+│   │   ├── index.css        # Semantic design tokens & core styling
 │   │   └── main.jsx
-│   ├── index.html           # Meta tags, fonts, and favicon configuration
+│   ├── index.html           # Meta tags, Plus Jakarta Sans, and smooth scrolling
 │   ├── package.json
-│   ├── tailwind.config.js
+│   ├── tailwind.config.js   # Tailwind theme mapping to CSS custom properties
 │   └── vite.config.js
 └── start-interlink.bat      # One-click Windows startup script
 ```
@@ -135,6 +136,7 @@ Double-click `start-interlink.bat` to automatically launch both the Backend API 
 #### 1. Backend:
 ```bash
 cd backend
+npm install
 npm run dev
 ```
 
@@ -143,8 +145,8 @@ npm run dev
 #### 2. Frontend:
 ```bash
 cd frontend
+npm install
 npm run dev
 ```
 
 Visit **`http://localhost:5173`** in your browser.
-"# Intership-Management-System" 

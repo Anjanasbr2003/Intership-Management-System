@@ -201,7 +201,7 @@ const getSuggestedStudents = async (req, res) => {
         {
           model: User,
           as: 'user',
-          attributes: ['id', 'name', 'email', 'personalEmail', 'phone', 'livingCity'],
+          attributes: ['id', 'name', 'email', 'livingCity'],
         },
         {
           model: University,

@@ -83,6 +83,7 @@ const sendJoinRequest = async (req, res) => {
         universityId: targetUniId,
         staffRegNo,
         position: position || req.user.position,
+        status: 'pending',
       },
       { where: { id: req.user.id } }
     );

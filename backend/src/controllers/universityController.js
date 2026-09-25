@@ -1,4 +1,5 @@
 const { University, JoinRequest, User, StudentProfile } = require('../models');
+const { sequelize } = require('../config/db');
 
 // Master list of all Sri Lankan universities (Government & Private/Non-state)
 const SRI_LANKAN_UNIVERSITIES_MASTER = [
@@ -111,24 +112,28 @@ const getJoinRequestsForHead = async (req, res) => {
 // @route   PATCH /api/universities/head/join-requests/:id
 // @access  Private (Head)
 const reviewJoinRequest = async (req, res) => {
+  const transaction = await sequelize.transaction();
   try {
     const { status } = req.body;
     if (!['approved', 'rejected'].includes(status)) {
+      await transaction.rollback();
       return res.status(400).json({ message: 'Invalid status' });
     }
 
-    const request = await JoinRequest.findByPk(req.params.id);
+    const request = await JoinRequest.findByPk(req.params.id, { transaction });
     if (!request) {
+      await transaction.rollback();
       return res.status(404).json({ message: 'Join request not found' });
     }
 
     if (String(request.universityId) !== String(req.user.universityId)) {
+      await transaction.rollback();
       return res.status(403).json({ message: 'Access denied to join request of another university' });
     }
 
     request.status = status;
     request.reviewedAt = new Date();
-    await request.save();
+    await request.save({ transaction });
 
     if (status === 'approved') {
       await User.update(
@@ -138,14 +143,16 @@ const reviewJoinRequest = async (req, res) => {
           staffRegNo: request.staffRegNo,
           position: request.position,
         },
-        { where: { id: request.supervisorId } }
+        { where: { id: request.supervisorId }, transaction }
       );
     } else {
       await User.update(
         { status: 'rejected' },
-        { where: { id: request.supervisorId } }
+        { where: { id: request.supervisorId }, transaction }
       );
     }
+
+    await transaction.commit();
 
     res.json({
       success: true,
@@ -153,6 +160,7 @@ const reviewJoinRequest = async (req, res) => {
       request,
     });
   } catch (error) {
+    await transaction.rollback();
     res.status(500).json({ message: error.message });
   }
 };
