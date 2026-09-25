@@ -1,14 +1,4 @@
 # Interlink — University Internship Management Portal
----
-
-## 👥 Project Team (Group)
-* **E. Tharinda Gimhana** — TG/2023/1704
-* **K. K. D. H. Somarathna** — TG/2023/1713
-* **R. A. S. Bandara** — TG/2023/1741
-* **N. V. T. J. Gunasekara** — TG/2023/1742
-* **S. M. H. Lankathilaka** — TG/2023/1746
-
----
 
 ## 🚀 System Overview & Architecture
 **Interlink** is a centralized, role-based internship management web platform built on **MySQL, Express.js, React, and Node.js** (utilizing **Sequelize ORM**), designed to connect universities, academic supervisors, students, and industry employers.
