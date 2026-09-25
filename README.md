@@ -1,7 +1,4 @@
 # Interlink — University Internship Management Portal
-### ICT 2232 | Software Engineering Project
-**Faculty of Technology, University of Ruhuna**
-
 ---
 
 ## 👥 Project Team (Group)
